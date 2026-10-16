@@ -1,0 +1,235 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-nodecimaldot,es-noshorthands]{babel}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage[margin=2.4cm,headheight=14pt]{geometry}
+\usepackage{booktabs,tabularx,array}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{fancyhdr}
+\usepackage[strings]{underscore}
+\usepackage{hyperref}
+
+\definecolor{unl}{RGB}{0,86,145}
+\definecolor{gris}{HTML}{475569}
+\hypersetup{colorlinks=true,linkcolor=unl,urlcolor=unl}
+\setlength{\parskip}{5pt}
+\setlength{\parindent}{0pt}
+\setlist{leftmargin=*,itemsep=2pt,topsep=3pt}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\lstset{basicstyle=\ttfamily\footnotesize,breaklines=true,frame=single,rulecolor=\color{gris},
+  columns=fullflexible,keepspaces=true,showstringspaces=false,
+  literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1 {ñ}{{\~n}}1
+    {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1 {Ñ}{{\~N}}1 {ü}{{\"u}}1}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Matemática II: Cálculo Integral}
+\rhead{Avance 2 -- Proyecto integrador}
+\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+% Texto gris = instrucción. Reemplácelo o elimínelo antes de entregar.
+\newcommand{\completar}[1]{\textit{\textcolor{gris}{#1}}}
+\newcommand{\completarm}[1]{{\color{gris}#1}}
+
+\begin{document}
+\hypersetup{pageanchor=false}
+
+\begin{titlepage}
+\centering
+\vspace*{1.6cm}
+{\Large\bfseries UNIVERSIDAD NACIONAL DE LOJA\par}
+\vspace{0.3cm}
+{\large Facultad Agropecuaria y de Recursos Naturales Renovables\par}
+{\large Carrera de Ingeniería Ambiental\par}
+\vspace{1.2cm}
+{\color{unl}\rule{0.82\linewidth}{1.3pt}\par}
+\vspace{0.5cm}
+{\huge\bfseries \completar{Título: magnitud integral, tema y zona}\par}
+\vspace{0.4cm}
+{\Large Proyecto integrador -- Avance 2\par}
+{\large Unidad 1, Fase 2: Avance técnico y datos\par}
+\vspace{0.5cm}
+{\color{unl}\rule{0.82\linewidth}{1.3pt}\par}
+\vfill
+\begin{tabular}{rl}
+\textbf{Asignatura:} & Matemática II: Cálculo Integral\\
+\textbf{Grupo:} & \completar{Número de grupo según la nómina oficial}\\
+\textbf{Tema y zona:} & \completar{Bloque temático -- Norte, Sur o cantón completo}\\
+\textbf{Integrantes:} & \completar{Apellidos y nombres completos}\\
+ & \completar{Añada una fila por integrante}\\
+\textbf{Docente:} & Ing. Guillermo Chuncho\\
+\textbf{Período académico:} & septiembre 2026 -- febrero 2027\\
+\textbf{Fecha:} & \completar{dd de mes de 2026}\\
+\end{tabular}
+\vspace{1cm}
+\end{titlepage}
+\hypersetup{pageanchor=true}
+
+% =====================================================================
+\section{Respuesta a la revisión del avance 1}
+Respondan a cada observación de su hoja en \texttt{Matriz\_revision\_avance1\_matematica.xlsx}. Incluyan obligatoriamente todas las observaciones críticas y mayores. Si no están de acuerdo con alguna, argumenten con evidencia. Los grupos sin entrega previa escriben «Primera presentación».
+
+\small
+\begin{tabularx}{\linewidth}{L{1.0cm} Y Y L{2.0cm}}
+\toprule
+\textbf{N.º} & \textbf{Observación (resumen)} & \textbf{Cambio realizado o justificación} & \textbf{Sección / página}\\
+\midrule
+\completar{1} & \completar{Resumen de la observación} & \completar{Qué se cambió y por qué} & \completar{Sec. x}\\
+\completar{2} & \completar{…} & \completar{…} & \completar{…}\\
+\bottomrule
+\end{tabularx}
+\normalsize
+
+% =====================================================================
+\section{Problema de investigación}
+\subsection{Planteamiento del problema}
+Organicen el texto en este orden: (1) situación territorial o ambiental de la ventana de estudio; (2) vacío de conocimiento: qué magnitud acumulada no se ha cuantificado; (3) relevancia, sin atribuir a la base efectos que no mide; (4) cómo una integral definida y los datos asignados permiten resolverlo.
+
+\completar{Redacte aquí el problema con datos de contexto citados (APA 7). Elimine estas instrucciones antes de entregar.}
+
+\subsection{Pregunta de investigación}
+Una sola pregunta, en clave de cálculo integral, que nombre la magnitud y sus unidades, la zona (o el transecto) y el periodo, y que pueda responderse con el CSV.
+
+\textbf{Pregunta:} \completar{Escriba aquí la pregunta.}
+
+\subsection{Hipótesis}
+Una afirmación contrastable, con indicador y umbral cuantitativo justificados. Escriban por separado el criterio de validación numérica del modelo.
+
+\textbf{Hipótesis:} \completar{Afirmación medible sobre el fenómeno.}
+
+\textbf{Justificación del umbral:} \completar{Fuente bibliográfica o evidencia de la exploración preliminar.}
+
+\textbf{Criterio de validación del modelo:} \completar{Ej.: error relativo entre la integral del modelo y la suma discreta menor que X \%.}
+
+% =====================================================================
+\section{Objetivos}
+\subsection{Objetivo general}
+\textbf{Objetivo general:} \completar{Verbo en infinitivo + magnitud integral + zona + datos + periodo. Debe responder la pregunta.}
+
+\subsection{Objetivos específicos}
+\begin{enumerate}
+  \item \completar{Objetivo específico 1.} \textbf{Salida:} \completar{tabla, valor, figura o error \%.}
+  \item \completar{Objetivo específico 2.} \textbf{Salida:} \completar{…}
+  \item \completar{Objetivo específico 3.} \textbf{Salida:} \completar{…}
+\end{enumerate}
+
+% =====================================================================
+\section{Metodología}
+\subsection{Zona de estudio y fuente de datos}
+\textbf{Grupo y tema:} \completar{Número de grupo y bloque temático.}\\
+\textbf{Zona y regla territorial:} \completar{Norte o Sur según centro\_y\_m respecto de 9\,555\,250 m, o cantón completo; indique cómo lo verificaron.}\\
+\textbf{Ventana de estudio:} \completar{Filas y columnas de la malla; número de celdas; área en km$^2$.}\\
+\textbf{Archivo asignado:} \completar{Nombre exacto y ruta en Unidad\_1/base\_de\_datos.}\\
+\textbf{Periodo y unidad de observación:} \completar{2019--2024; celda de 500 m (relieve) o celda--mes (cobertura, clima), o mes cantonal (incendios).}
+
+\subsection{Marco de variables}
+Usen los nombres exactos de las columnas y consulten el significado y la unidad en \texttt{DICCIONARIO\_VARIABLES.csv}. Incluyan solo las variables que usarán y distingan las analíticas de las de control.
+
+\small
+\begin{tabularx}{\linewidth}{L{3.4cm} Y L{1.0cm} L{0.9cm} L{1.5cm} L{1.3cm} L{1.6cm}}
+\toprule
+\textbf{Columna} & \textbf{Magnitud} & \textbf{Símb.} & \textbf{Dim.} & \textbf{Unidad dato} & \textbf{Unidad SI} & \textbf{Uso}\\
+\midrule
+\completar{nombre\_exacto} & \completar{Definición} & \completar{$x$} & \completar{L} & \completar{m} & \completar{m} & \completar{analítica / control}\\
+\completar{nombre\_exacto} & \completar{Definición} & \completar{} & \completar{} & \completar{} & \completar{} & \completar{}\\
+\completar{nombre\_exacto} & \completar{Definición} & \completar{} & \completar{} & \completar{} & \completar{} & \completar{}\\
+\bottomrule
+\end{tabularx}
+\normalsize
+
+\subsection{Auditoría de calidad}
+Reporten el resultado de cada control (realizado con el código del anexo).
+
+\small
+\begin{tabularx}{\linewidth}{L{4.6cm} L{3.0cm} Y}
+\toprule
+\textbf{Control} & \textbf{Esperado} & \textbf{Observado / decisión}\\
+\midrule
+Filas $\times$ columnas & \completar{p. ej. 7\,200 $\times$ 22} & \completar{}\\
+Celdas únicas & \completar{} & \completar{}\\
+Periodo (anio, mes, t\_mes); sin 2025 & 2019--2024; 1--12; 1--72 & \completar{}\\
+Regla de zona (centro\_y\_m) & \completar{} & \completar{}\\
+Duplicados & 0 & \completar{}\\
+Faltantes por variable analítica & \completar{} & \completar{n y \% por columna; por mes o por celda si aplica}\\
+Campos de calidad del tema & \completar{p. ej. sentinel\_t1\_missing} & \completar{}\\
+Rangos físicamente plausibles & \completar{} & \completar{}\\
+\bottomrule
+\end{tabularx}
+\normalsize
+
+\textbf{Tratamiento de datos faltantes:} \completar{Excluir, promediar las celdas válidas o interpolar; justifique la decisión.}
+
+\subsection{Exploración preliminar}
+\begin{itemize}
+  \item \textbf{Cinco filas de ejemplo:} \completar{tabla breve con las columnas seleccionadas; indique cómo se eligieron.}
+  \item \textbf{Estadísticos descriptivos:} \completar{tabla con $n$ válido, mínimo, máximo, media y desviación estándar, con unidades.}
+  \item \textbf{Primera visualización exploratoria:} \completar{inserte la figura con título, ejes, unidades, zona y periodo.}
+  \item \textbf{Hechos observados:}
+  \begin{enumerate}
+    \item \completar{Hecho 1 y la variable o los registros que lo sustentan.}
+    \item \completar{Hecho 2 …}
+    \item \completar{Hecho 3 …}
+  \end{enumerate}
+\end{itemize}
+
+% Ejemplo para insertar la figura generada por el código:
+% \begin{figure}[h]\centering
+%   \includegraphics[width=0.85\linewidth]{figuras/exploracion_1.pdf}
+%   \caption{Título, zona y periodo. Fuente: elaboración propia con base en ...}
+% \end{figure}
+
+% =====================================================================
+\section{Planteamiento matemático inicial}
+\subsection{Modelo funcional}
+\completar{Variable independiente, dominio y unidades; forma propuesta de la función (polinómica, trigonométrica, por tramos…) y por qué, según la exploración.}
+\[
+  \completarm{f(x) =\ldots \qquad x\in[a,b]\ \text{[unidades]}}
+\]
+
+\subsection{Integral definida}
+\completar{Integral que se calculará, límites de integración justificados, unidades del resultado e interpretación física.}
+\[
+  \completarm{I =\int_{a}^{b} f(x)\,dx \quad [\text{unidades}]}
+\]
+\textbf{Conexión con el TFC:} \completar{Antiderivada $F$, qué representa y cómo se verificará que $\int_a^b f = F(b)-F(a)$.}
+
+\subsection{Discretización y aproximación inicial}
+\completar{$\Delta x$ o $\Delta t$, número de subintervalos $n$ y fórmula de la suma de Riemann o del trapecio con los datos observados.}
+\[
+  \completarm{T_n =\frac{\Delta x}{2}\left[f(x_0) + 2\sum_{i=1}^{n-1} f(x_i) + f(x_n)\right]}
+\]
+\textbf{Resultado preliminar:} \completar{valor obtenido con el código, con unidades. Indique que es preliminar.}
+
+\textbf{Control dimensional:} \completar{p. ej. [m$^2$] = [m] $\times$ [m].}
+
+\subsection{Actividades realizadas y pendientes}
+\completar{Separe lo que ya se comprobó de lo que queda planificado para el producto técnico (Fase 3).}
+
+% =====================================================================
+\section*{Referencias}
+\completar{Lista en APA 7, solo con fuentes citadas en el texto y localizables (DOI o URL). Incluya la base y el diccionario del curso.}
+
+\begin{itemize}
+  \item \completar{Autor, A. (Año). Título. \textit{Revista, vol}(n), pp. https://doi.org/...}
+\end{itemize}
+
+\appendix
+\section{Código reproducible}
+\textbf{Ruta en el repositorio:} \completar{p. ej. Unidad\_1/proyecto/grupo\_XX/avance2.ipynb}
+
+\begin{lstlisting}[language=Python]
+# Fragmento representativo (reemplazar por el código del equipo)
+import pandas as pd
+df = pd.read_csv("ruta/relativa/al/archivo.csv")   # solo lectura
+print(df.shape)
+\end{lstlisting}
+
+\section{Declaración de uso de inteligencia artificial}
+\completar{Herramienta utilizada, para qué se usó, qué verificó el equipo y qué partes fueron reescritas por el equipo.}
+
+\end{document}

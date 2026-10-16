@@ -1,0 +1,108 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}
+\geometry{top=1.8cm,bottom=1.8cm,left=2cm,right=2cm}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{ragged2e}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+
+\definecolor{azulClaroUNL}{RGB}{0,86,145}
+\definecolor{azulOscuroUNL}{RGB}{12,43,92}
+\definecolor{verdeAmbiental}{RGB}{27,107,74}
+\definecolor{rojoAlerta}{RGB}{179,38,30}
+\definecolor{grisFondo}{RGB}{247,249,252}
+\definecolor{doradoUNL}{RGB}{197,143,39}
+
+\hypersetup{colorlinks=true,linkcolor=azulOscuroUNL,urlcolor=azulClaroUNL}
+\setlength{\headheight}{22pt}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.8pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{azulClaroUNL}\leaders\hrule height \headrulewidth\hfill}}
+\fancyhead[L]{\footnotesize\textbf{UNIVERSIDAD NACIONAL DE LOJA} $\vert$ Ing. Ambiental}
+\fancyhead[R]{\footnotesize Matemática II $\vert$ Guía 2}
+\fancyfoot[L]{\footnotesize Ciclo Sep. 2026 -- Feb. 2027}
+\fancyfoot[C]{\footnotesize Cálculo Integral aplicado a Ingeniería Ambiental}
+\fancyfoot[R]{\footnotesize Pág. \thepage}
+
+\titleformat{\section}{\large\bfseries\color{azulOscuroUNL}}{\thesection.}{0.5em}{}[\titlerule]
+\titleformat{\subsection}{\normalsize\bfseries\color{azulClaroUNL}}{\thesubsection.}{0.4em}{}
+\titlespacing*{\section}{0pt}{9pt}{4pt}
+
+\newtcolorbox{bannerbox}[1][]{colback=azulOscuroUNL,colframe=azulOscuroUNL,arc=3pt,boxrule=1pt,top=7pt,bottom=7pt,left=9pt,right=9pt,breakable,#1}
+\newtcolorbox{conceptbox}[1][]{colback=grisFondo,colframe=azulClaroUNL,arc=3pt,boxrule=0.8pt,top=5pt,bottom=5pt,left=8pt,right=8pt,breakable,#1}
+\newtcolorbox{goalbox}[1][]{colback=green!4!white,colframe=verdeAmbiental,arc=3pt,boxrule=0.8pt,top=5pt,bottom=5pt,left=8pt,right=8pt,breakable,#1}
+\newtcolorbox{alertbox}[1][]{colback=red!3!white,colframe=rojoAlerta,arc=3pt,boxrule=0.8pt,top=5pt,bottom=5pt,left=8pt,right=8pt,breakable,#1}
+
+\begin{document}
+\thispagestyle{plain}
+
+\begin{center}
+  {\Large\textbf{\color{azulOscuroUNL}UNIVERSIDAD NACIONAL DE LOJA}}\\[2pt]
+  {\normalsize\textbf{FACULTAD AGROPECUARIA Y DE RECURSOS NATURALES RENOVABLES}}\\[2pt]
+  {\normalsize\textbf{CARRERA DE INGENIERÍA AMBIENTAL}}\\[4pt]
+  {\small Matemática II $\vert$ Unidad 1 $\vert$ Septiembre 2026 -- Febrero 2027}
+\end{center}
+
+\vspace{0.15cm}
+\begin{bannerbox}
+  \centering\color{white}
+  {\Large\bfseries GUÍA 2: INTEGRALES EN PROBLEMAS AMBIENTALES}\\[3pt]
+  {\normalsize Antiderivadas y problemas de valor inicial}\\[3pt]
+  {\small Ingeniería Ambiental $\vert$ Docente: Guillermo Chuncho}
+\end{bannerbox}
+
+\begin{goalbox}[title=Objetivo de los ejercicios]
+Aplicar las propiedades de linealidad y las integrales inmediatas para obtener antiderivadas de tasas ambientales; formular y resolver problemas de valor inicial para reconstruir funciones acumuladas, determinar la constante con una condición inicial y evaluar resultados con unidades e interpretación física coherentes.
+\end{goalbox}
+
+\begin{conceptbox}[title=Indicaciones de trabajo]
+Resuelva los 20 ejercicios mostrando el procedimiento. En los ejercicios 1--10, reescriba raíces y cocientes como potencias cuando convenga, separe el integrando por linealidad e incluya la constante $C$. En los ejercicios 11--20, identifique la tasa, integre, use el dato inicial para determinar $C$ y evalúe la función acumulada en el tiempo solicitado. En cada problema, el tiempo se expresa numéricamente en la unidad indicada; los coeficientes incorporan las unidades necesarias para que las tasas tengan las unidades descritas.
+\end{conceptbox}
+
+\section{Antiderivadas de tasas ambientales}
+
+Para cada situación, determine una antiderivada $F(t)=\int r(t)\,dt$. Exprese el resultado con la constante de integración y conserve la interpretación y las unidades del contexto.
+
+\begin{enumerate}[leftmargin=*,itemsep=8pt,label=\textbf{\arabic*.}]
+  \item \textbf{Infiltración en suelo.} Durante un ensayo, la tasa de infiltración se modela por $r(t)=5t^4-3\sqrt{t}+2t$ litros por hora, con $t$ en horas. Determine el volumen acumulado en forma general.
+  \item \textbf{Retención de sedimentos.} La tasa de retención de una barrera de sedimentos es $r(t)=4t^{2/3}-\dfrac{6}{t^2}+3$ kilogramos por día, para $t>0$. Obtenga la función acumulada.
+  \item \textbf{Degradación de un contaminante.} La tasa neta de transformación de una sustancia es $r(t)=3e^t+\dfrac{4}{t}-2\cos t$ miligramos por hora, para $t>0$. Determine una antiderivada.
+  \item \textbf{Captura de carbono.} La tasa de captura en una parcela es $r(t)=7\cdot2^t+5\sin t+3\sec^2 t$ kilogramos de carbono por mes. Integre término a término.
+  \item \textbf{Crecimiento de biomasa.} La tasa de incremento de biomasa vegetal es $r(t)=6t^{1/3}+8t^{-1/2}-5$ kilogramos por hectárea y mes. Exprese la antiderivada usando potencias racionales o radicales.
+  \item \textbf{Flujo de lixiviado.} El caudal de lixiviado en un sistema piloto se representa por $q(t)=\dfrac{5}{\sqrt{t}}+\dfrac{3}{\sqrt[3]{t}}-\dfrac{2}{t}$ litros por minuto, para $t>0$. Determine el volumen acumulado general.
+  \item \textbf{Oscilación diaria de temperatura.} La tasa de cambio de temperatura de un cuerpo de agua se aproxima por $r(t)=2\sin(3t)-4\cos(2t)+t^2$ grados Celsius por hora. Calcule una antiderivada.
+  \item \textbf{Descomposición de materia orgánica.} La tasa de transformación de materia orgánica es $r(t)=4e^{-2t}+3t^{-3/2}+6$ gramos por día. Integre cada término y simplifique.
+  \item \textbf{Producción de biogás.} La tasa de producción de biogás en un biodigestor es $q(t)=5t^3-\dfrac{2}{t^3}+\dfrac{3}{\sqrt[3]{t^2}}$ litros por hora, para $t>0$. Determine su antiderivada.
+  \item \textbf{Oxígeno disuelto.} En un ensayo de aireación, la tasa de variación de la concentración de oxígeno se modela como $r(t)=3t^{1/2}-2t^{-2/3}+4e^t-\sin t$ miligramos por litro y hora. Obtenga una antiderivada para $t>0$.
+\end{enumerate}
+
+\section{Problemas de valor inicial y acumulación}
+
+En cada problema, la función $X(t)$ representa una cantidad acumulada y su derivada es la tasa indicada, $X'(t)=r(t)$. Determine $X(t)$, aplique la condición inicial y calcule el valor solicitado, con unidades.
+
+\begin{enumerate}[leftmargin=*,itemsep=9pt,label=\textbf{\arabic*.},start=11]
+  \item \textbf{Volumen infiltrado.} La tasa de infiltración durante una lluvia es $V'(t)=8-2\sqrt{t}$ litros por hora, para $0\leq t\leq9$. Si $V(0)=0$, encuentre $V(t)$ y calcule el volumen infiltrado a las 4 horas.
+  \item \textbf{Sedimento retenido.} La tasa de retención en un filtro es $M'(t)=3t^2+4$ kilogramos por día. Si al inicio $M(0)=15$ kg, determine $M(t)$ y la masa retenida después de 2 días.
+  \item \textbf{Precipitación acumulada.} La tasa de precipitación de un evento se aproxima por $P'(t)=10-t$ milímetros por hora, para $0\leq t\leq8$. Si $P(0)=0$, obtenga $P(t)$ y la precipitación acumulada en 6 horas.
+  \item \textbf{Remoción de contaminante.} La tasa de masa removida por un tratamiento es $R'(t)=4e^t$ gramos por hora. Si $R(0)=2$ g, determine $R(t)$ y la masa removida cuando $t=\ln 2$ horas.
+  \item \textbf{Volumen de un reservorio.} El caudal neto de entrada es $Q'(t)=5+3\sqrt{t}$ metros cúbicos por hora, para $0\leq t\leq4$. Si el volumen al inicio es $Q(0)=40$ m$^3$, encuentre $Q(t)$ y el volumen a las 4 horas.
+  \item \textbf{Carbono fijado.} La tasa de fijación de carbono es $C'(t)=6+2\cos t$ kilogramos por mes. Si $C(0)=12$ kg, determine $C(t)$ y la cantidad acumulada a los $\pi/2$ meses.
+  \item \textbf{Carga de nitratos.} La tasa de ingreso de nitratos a un humedal es $N'(t)=4+\dfrac{2}{t}$ gramos por día, para $1\leq t\leq5$. Si $N(1)=10$ g, obtenga $N(t)$ y calcule la carga al día 4.
+  \item \textbf{Escorrentía acumulada.} La tasa de escorrentía de una microcuenca se modela por $E'(t)=12t-3t^2$ metros cúbicos por hora, para $0\leq t\leq4$. Si $E(0)=0$, encuentre $E(t)$ y el volumen acumulado a las 3 horas.
+  \item \textbf{Biogás producido.} La tasa de producción en un biodigestor es $B'(t)=2^t+2$ litros por día. Si $B(0)=0$, determine $B(t)$ y el volumen producido después de 3 días.
+  \item \textbf{Carga de contaminante capturada.} La tasa de captura de un filtro es $M'(t)=2t+3e^{-t}$ gramos por hora. Si inicialmente no se ha capturado masa, $M(0)=0$, determine $M(t)$ y calcule la masa capturada a las 2 horas.
+\end{enumerate}
+
+\begin{alertbox}[title=Verificación final]
+Compruebe cada antiderivada derivando el resultado. En los problemas de valor inicial, sustituya el tiempo inicial y confirme que se recupera el dato proporcionado. Revise que las unidades de la tasa, del tiempo y de la cantidad acumulada sean compatibles.
+\end{alertbox}
+
+\end{document}

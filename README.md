@@ -11,8 +11,8 @@
 
 1. 🚀 **[Guía Paso a Paso para Estudiantes: GitHub, VS Code, venv y Terminal](GUIA_ESTUDIANTE_CONFIGURACION_ENTORNO.md)**  
    *Consulte este documento para instalar herramientas, clonar el repositorio, crear el entorno virtual y configurar VS Code.*
-2. 📄 **[Guía General del Proyecto Integrador (PDF)](Unidad_1/05_Guias/guia_general_proyecto_integrador_matematica.pdf)** y código fuente **[.tex](Unidad_1/05_Guias/guia_general_proyecto_integrador_matematica.tex)**.
-3. 📄 **[Guía Práctica de Entorno y GitHub para Estudiantes (PDF)](Unidad_1/05_Guias/guia_estudiante_entorno_github_vscode.pdf)** y código fuente **[.tex](Unidad_1/05_Guias/guia_estudiante_entorno_github_vscode.tex)**.
+2. 📄 **[Guía General del Proyecto Integrador (PDF)](Unidad_1/guias_de_estudio/guia_1/guia_general_proyecto_integrador_matematica.pdf)** y código fuente **[.tex](Unidad_1/guias_de_estudio/guia_1/guia_general_proyecto_integrador_matematica.tex)**.
+3. 📄 **[Guía Práctica de Entorno y GitHub para Estudiantes (PDF)](Unidad_1/guias_de_estudio/guia_2/guia_estudiante_entorno_github_vscode.pdf)** y código fuente **[.tex](Unidad_1/guias_de_estudio/guia_2/guia_estudiante_entorno_github_vscode.tex)**.
 
 ---
 
@@ -23,31 +23,60 @@ Informacion_matematica/
 ├── requirements.txt                     <- Dependencias cientificas de Python
 ├── GUIA_ESTUDIANTE_CONFIGURACION_ENTORNO.md <- Guia metodologica y practica de terminal
 ├── Unidad_1/
-│   ├── bases_datos_proyecto_integrador/ <- Bases oficiales de datos (solo lectura)
-│   ├── 01_formulacion_3pct/             <- Entrega Fase 1: Delimitacion, hipotesis y variables
-│   ├── 02_avance_4pct/                  <- Entrega Fase 2: Scripts y analisis exploratorio
-│   ├── 03_producto_tecnico_10pct/       <- Entrega Fase 3: Informe formal de Formulacion (LaTeX/PDF)
-│   ├── 04_defensa_individual_8pct/      <- Entrega Fase 4: Presentacion y diapositivas
-│   └── 05_Guias/                        <- Guias oficiales de la catedra (.pdf y .tex)
+│   ├── avance_proyecto_integrador/
+│   │   ├── avance_1/
+│   │   ├── avance_2/
+│   │   └── avance_3/
+│   ├── guias_de_estudio/
+│   │   ├── guia_1/                      <- Guía general del proyecto (PDF y LaTeX)
+│   │   ├── guia_2/                      <- Guía de entorno y GitHub (PDF y LaTeX)
+│   │   └── guia_3/                      <- Guía de integrales (PDF y LaTeX)
+│   ├── lecciones/
+│   ├── base_de_datos/                   <- Única carpeta de bases oficiales
+│   │   ├── Grupo_01_Relieve_Norte/
+│   │   ├── Grupo_02_Relieve_Sur/
+│   │   ├── Grupo_03_Cobertura_Norte/
+│   │   ├── Grupo_04_Cobertura_Sur/
+│   │   ├── Grupo_05_Clima_Norte/
+│   │   ├── Grupo_06_Clima_Sur/
+│   │   └── Grupo_07_Incendios_Loja/
+│   ├── defensa_individual/
+│   ├── formulacion/
+│   ├── guia/                            <- Sílabo, fechas, presentaciones y exámenes
+│   └── producto_tecnico/
 ├── Unidad_2/
-│   ├── 01_formulacion_3pct/             <- Entrega Fase 1 U2: Modelos continuos no lineales
-│   ├── 02_avance_4pct/                  <- Entrega Fase 2 U2: Integracion analitica y numerica
-│   ├── 03_producto_tecnico_10pct/       <- Entrega Fase 3 U2: Informe de Metodologia (LaTeX/PDF)
-│   ├── 04_defensa_individual_8pct/      <- Entrega Fase 4 U2: Material de sustentacion
-│   └── 05_Guias/
+│   ├── avance_proyecto_integrador/
+│   │   ├── avance_1/
+│   │   ├── avance_2/
+│   │   └── avance_3/
+│   ├── guias_de_estudio/
+│   │   ├── guia_1/                      <- Guía general del proyecto (PDF y LaTeX)
+│   │   └── guia_2/                      <- Guía de entorno y GitHub (PDF y LaTeX)
+│   ├── lecciones/
+│   ├── defensa_individual/
+│   ├── formulacion/
+│   ├── guia/
+│   └── producto_tecnico/
 └── Unidad_3/
-    ├── 01_formulacion_3pct/             <- Entrega Fase 1 U3: Modelacion fisica y balances
-    ├── 02_avance_4pct/                  <- Entrega Fase 2 U3: Integrales dobles y serie temporal
-    ├── 03_producto_tecnico_10pct/       <- Entrega Fase 3 U3: Informe Final Consolidado (LaTeX/PDF)
-    ├── 04_defensa_individual_8pct/      <- Entrega Fase 4 U3: Sustentacion individual final
-    └── 05_Guias/
+    ├── avance_proyecto_integrador/
+    │   ├── avance_1/
+    │   ├── avance_2/
+    │   └── avance_3/
+    ├── guias_de_estudio/
+    │   ├── guia_1/                      <- Guía general del proyecto (PDF y LaTeX)
+    │   └── guia_2/                      <- Guía de entorno y GitHub (PDF y LaTeX)
+    ├── lecciones/
+    ├── defensa_individual/
+    ├── formulacion/
+    ├── guia/
+    └── producto_tecnico/
 ```
 
 ---
 
 ## 📊 Asignación de Equipos y Bases de Datos
 
-Las bases están en [`Unidad_1/bases_datos_proyecto_integrador/`](Unidad_1/bases_datos_proyecto_integrador/README.md). Son **ventanas de estudio** pequeñas, preparadas para plantear integrales directamente (transectos, series de 72 meses y regiones rectangulares); ver la [guía de las bases](Unidad_1/bases_datos_proyecto_integrador/README.md) y el [diccionario de variables](Unidad_1/bases_datos_proyecto_integrador/DICCIONARIO_VARIABLES.csv).
+Las siete bases oficiales están en [`Unidad_1/base_de_datos/`](Unidad_1/base_de_datos/), organizadas por grupo. Las definiciones de variables y el manifiesto se conservan en [`Unidad_1/guias_de_estudio/datos_referencia/`](Unidad_1/guias_de_estudio/datos_referencia/). Son **ventanas de estudio** pequeñas, preparadas para plantear integrales directamente (transectos, series de 72 meses y regiones rectangulares).
 
 | Equipo | Temática Asignada | Zona Territorial | Subcarpeta | Tamaño |
 | :---: | :--- | :---: | :--- | :--- |

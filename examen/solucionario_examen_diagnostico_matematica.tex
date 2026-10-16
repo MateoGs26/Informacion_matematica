@@ -1,0 +1,125 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{geometry}
+\geometry{top=1.5cm,bottom=1.5cm,left=1.8cm,right=1.8cm}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{xcolor}
+
+\definecolor{unlbluelight}{RGB}{0,86,145}
+\definecolor{respcolor}{RGB}{16,80,30}
+
+\begin{document}
+
+\begin{center}
+    {\fontsize{13}{15}\selectfont \textbf{\color{unlbluelight}UNIVERSIDAD NACIONAL DE LOJA}}\\[2pt]
+    {\fontsize{10}{12}\selectfont \textbf{FACULTAD AGROPECUARIA Y DE RECURSOS NATURALES RENOVABLES}}\\[2pt]
+    {\fontsize{10}{12}\selectfont \textbf{CARRERA DE COMPUTACIÓN} $\vert$ \textbf{MATEMÁTICA II (CÁLCULO INTEGRAL)}}\\[3pt]
+    {\fontsize{12}{14}\selectfont \textbf{SOLUCIONARIO DETALLADO: EVALUACIÓN DIAGNÓSTICA}}\\[2pt]
+    {\small \textbf{Ciclo Académico:} Septiembre 2026 -- Febrero 2027 \quad $\vert$ \quad \textbf{Puntaje Total:} 10.0 puntos}
+\end{center}
+
+\vspace{-4pt}
+\noindent\rule{\textwidth}{1.2pt}
+
+\vspace{6pt}
+
+\begin{enumerate}[leftmargin=*,itemsep=16pt,label=\textbf{Ejercicio \arabic*.}]
+
+    \item \textbf{[Reescritura Algebraica y Potencias -- 2.0 puntos]}
+    \begin{enumerate}[label=\alph*),itemsep=8pt]
+        \item Descomponer y reescribir:
+        \[
+        f(x) = \frac{6x^4 - 4x\sqrt{x} + 3}{2x^2} = \frac{6x^4}{2x^2} - \frac{4x \cdot x^{1/2}}{2x^2} + \frac{3}{2x^2}
+        \]
+        Simplificando cada término:
+        \[
+        \frac{6x^4}{2x^2} = 3x^2, \quad \frac{4x^{3/2}}{2x^2} = 2x^{3/2 - 2} = 2x^{-1/2}, \quad \frac{3}{2x^2} = \frac{3}{2}x^{-2}
+        \]
+        {\color{respcolor}\textbf{Respuesta:}} $\displaystyle f(x) = 3x^2 - 2x^{-1/2} + \frac{3}{2}x^{-2}$ \quad (Términos listos para integrar mediante regla de la potencia).
+        
+        \item Expresar como una sola potencia:
+        \[
+        g(x) = \sqrt[3]{x^2 \cdot \sqrt{x}} = \sqrt[3]{x^2 \cdot x^{1/2}} = \sqrt[3]{x^{5/2}} = \left(x^{5/2}\right)^{1/3} = x^{(5/2) \cdot (1/3)} = x^{5/6}
+        \]
+        {\color{respcolor}\textbf{Respuesta:}} $\displaystyle g(x) = x^{5/6}$.
+    \end{enumerate}
+
+    \item \textbf{[Cálculo de Derivadas y Reglas del Producto/Cociente -- 2.0 puntos]}
+    \begin{enumerate}[label=\alph*),itemsep=8pt]
+        \item Derivar $f(x) = (3x^2 - 2x + 1)e^{3x}$:
+        Aplicando la regla del producto $(u \cdot v)' = u'v + uv'$:
+        \[
+        u = 3x^2 - 2x + 1 \implies u' = 6x - 2
+        \]
+        \[
+        v = e^{3x} \implies v' = 3e^{3x}
+        \]
+        \[
+        f'(x) = (6x - 2)e^{3x} + (3x^2 - 2x + 1)(3e^{3x}) = e^{3x}\left[ (6x - 2) + (9x^2 - 6x + 3) \right]
+        \]
+        {\color{respcolor}\textbf{Respuesta:}} $\displaystyle f'(x) = (9x^2 + 1)e^{3x}$.
+
+        \item Derivar $g(x) = \frac{x^2 - 4}{x^2 + 4}$:
+        Aplicando la regla del cociente $\left(\frac{u}{v}\right)' = \frac{u'v - uv'}{v^2}$:
+        \[
+        g'(x) = \frac{2x(x^2 + 4) - (x^2 - 4)(2x)}{(x^2 + 4)^2} = \frac{2x^3 + 8x - (2x^3 - 8x)}{(x^2 + 4)^2} = \frac{16x}{(x^2 + 4)^2}
+        \]
+        {\color{respcolor}\textbf{Respuesta:}} $\displaystyle g'(x) = \frac{16x}{(x^2 + 4)^2}$.
+    \end{enumerate}
+
+    \item \textbf{[Regla de la Cadena y Diferenciales -- 2.0 puntos]}
+    \begin{enumerate}[label=\alph*),itemsep=8pt]
+        \item Diferencial de $y = \ln(4x^3 - 5x + 7)$:
+        Por regla de la cadena, $\frac{d}{dx}[\ln(u)] = \frac{u'}{u}$:
+        \[
+        \frac{dy}{dx} = \frac{12x^2 - 5}{4x^3 - 5x + 7} \implies dy = \left( \frac{12x^2 - 5}{4x^3 - 5x + 7} \right) dx
+        \]
+        {\color{respcolor}\textbf{Respuesta:}} $\displaystyle dy = \frac{12x^2 - 5}{4x^3 - 5x + 7}\,dx$.
+
+        \item Si $u = \sin(3x^2 - 1)$:
+        Aplicando la regla de la cadena: $\frac{du}{dx} = \cos(3x^2 - 1) \cdot \frac{d}{dx}(3x^2 - 1) = 6x \cos(3x^2 - 1)$.
+        \[
+        {\color{respcolor}\textbf{Respuesta:}} \displaystyle du = 6x\cos(3x^2 - 1)\,dx.
+        \]
+    \end{enumerate}
+
+    \item \textbf{[Identidades Trigonométricas -- 2.0 puntos]}
+    \begin{enumerate}[label=\alph*),itemsep=8pt]
+        \item Demostrar $\frac{\sin(2x)}{1 + \cos(2x)} = \tan(x)$:
+        Utilizando las identidades del ángulo doble $\sin(2x) = 2\sin(x)\cos(x)$ y $\cos(2x) = 2\cos^2(x) - 1$:
+        \[
+        \frac{\sin(2x)}{1 + \cos(2x)} = \frac{2\sin(x)\cos(x)}{1 + (2\cos^2(x) - 1)} = \frac{2\sin(x)\cos(x)}{2\cos^2(x)} = \frac{\sin(x)}{\cos(x)} = \tan(x) \quad \text{(Q.E.D.)}
+        \]
+        \item Despejar $\cos^2(x)$ de $\cos(2x) = 2\cos^2(x) - 1$:
+        \[
+        \cos(2x) + 1 = 2\cos^2(x) \implies \cos^2(x) = \frac{1 + \cos(2x)}{2}
+        \]
+        {\color{respcolor}\textbf{Respuesta:}} $\displaystyle \cos^2(x) = \frac{1}{2} + \frac{1}{2}\cos(2x)$ \quad (Identidad fundamental para integrar $\int \cos^2(x)dx$).
+    \end{enumerate}
+
+    \item \textbf{[Problema del Valor Inicial / Operación Inversa -- 2.0 puntos]}
+    \begin{enumerate}[label=\alph*),itemsep=8pt]
+        \item Dada $\frac{ds}{dt} = 6t^2 - 8t + 5$:
+        La antiderivada general es:
+        \[
+        s(t) = 6\left(\frac{t^3}{3}\right) - 8\left(\frac{t^2}{2}\right) + 5t + C = 2t^3 - 4t^2 + 5t + C
+        \]
+        Aplicando la condición inicial $s(0) = 4$:
+        \[
+        s(0) = 2(0)^3 - 4(0)^2 + 5(0) + C = 4 \implies C = 4
+        \]
+        {\color{respcolor}\textbf{Respuesta:}} $\displaystyle s(t) = 2t^3 - 4t^2 + 5t + 4$.
+
+        \item En $t = 2$:
+        \[
+        s(2) = 2(2)^3 - 4(2)^2 + 5(2) + 4 = 2(8) - 4(4) + 10 + 4 = 16 - 16 + 14 = 14
+        \]
+        {\color{respcolor}\textbf{Respuesta:}} La posición de la partícula en $t = 2$ es de $14$ unidades.
+    \end{enumerate}
+
+\end{enumerate}
+
+\end{document}

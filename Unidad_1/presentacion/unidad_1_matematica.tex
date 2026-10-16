@@ -1,0 +1,1408 @@
+\documentclass[aspectratio=169,11pt]{beamer}
+
+% ============================================================
+% Matemática 2 - Unidad 1: Cálculo diferencial y fundamentos del cálculo integral
+% Presentación unificada, autosuficiente y compatible con pdfLaTeX/Prism.
+% ============================================================
+
+% ---------------- Paquetes ----------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\decimalpoint
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage{ragged2e}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,calc,fit,backgrounds}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage[most]{tcolorbox}
+
+% ---------------- Paleta de color: Matemática (azul) ----------------
+\definecolor{azul}{RGB}{13,44,80}
+\definecolor{azulOsc}{RGB}{8,27,52}
+\definecolor{azulMedio}{RGB}{39,86,140}
+\definecolor{azulClaro}{RGB}{206,224,240}
+\definecolor{tealProfundo}{RGB}{0,90,99}
+\definecolor{tealMedio}{RGB}{40,130,140}
+\definecolor{tealClaro}{RGB}{204,232,232}
+\definecolor{acento}{RGB}{198,110,38}
+\definecolor{acentoClaro}{RGB}{247,226,201}
+\definecolor{alerta}{RGB}{165,40,40}
+\definecolor{alertaClara}{RGB}{242,213,208}
+\definecolor{grafito}{RGB}{51,51,51}
+\definecolor{grisMedio}{RGB}{120,128,126}
+\definecolor{grisClaro}{RGB}{244,246,245}
+\definecolor{blancoSuave}{RGB}{253,254,253}
+
+% ---------------- Tema base ----------------
+\usetheme{default}
+\setbeamertemplate{navigation symbols}{}
+\setbeamercolor{background canvas}{bg=blancoSuave}
+\setbeamercolor{normal text}{fg=grafito,bg=blancoSuave}
+\setbeamercolor{structure}{fg=azul}
+\setbeamercolor{title}{fg=white,bg=azul}
+\setbeamercolor{frametitle}{fg=white,bg=azul}
+\setbeamercolor{footline}{fg=grafito,bg=grisClaro}
+\setbeamercolor{block title}{fg=white,bg=azul}
+\setbeamercolor{block body}{fg=grafito,bg=azulClaro!45}
+\setbeamercolor{block title alerted}{fg=white,bg=acento}
+\setbeamercolor{block body alerted}{fg=grafito,bg=acentoClaro!70}
+\setbeamercolor{block title example}{fg=white,bg=tealProfundo}
+\setbeamercolor{block body example}{fg=grafito,bg=tealClaro!55}
+\setbeamercolor{alerted text}{fg=acento}
+\setbeamercolor{itemize item}{fg=azul}
+\setbeamercolor{itemize subitem}{fg=tealMedio}
+\setbeamercolor{enumerate item}{fg=azul}
+
+\setbeamerfont{title}{size=\LARGE,series=\bfseries}
+\setbeamerfont{subtitle}{size=\normalsize}
+\setbeamerfont{frametitle}{size=\large,series=\bfseries}
+\setbeamerfont{framesubtitle}{size=\small,series=\mdseries}
+\setbeamerfont{block title}{size=\normalsize,series=\bfseries}
+\setbeamerfont{footline}{size=\tiny}
+
+\setbeamertemplate{itemize item}{\color{azul}$\blacktriangleright$}
+\setbeamertemplate{itemize subitem}{\color{tealMedio}$\circ$}
+\setbeamertemplate{enumerate item}{\color{azul}\bfseries\insertenumlabel.}
+\setlength{\leftmargini}{1.05em}
+\setlength{\leftmarginii}{1.05em}
+
+% ---------------- Título de marco y pie de pagina ----------------
+\setbeamertemplate{frametitle}{%
+  \vspace{-0.05cm}%
+  \begin{beamercolorbox}[wd=\paperwidth,ht=0.86cm,dp=0.24cm,leftskip=0.5cm,rightskip=0.6cm]{frametitle}%
+    \usebeamerfont{frametitle}\insertframetitle%
+    \ifx\insertframesubtitle\empty\else\\[-0.05cm]{\usebeamerfont{framesubtitle}\color{acentoClaro}\insertframesubtitle}\fi%
+  \end{beamercolorbox}%
+  \vspace{-0.30cm}{\color{acento}\rule{\paperwidth}{2.4pt}}\vspace{0.10cm}%
+}
+\setbeamertemplate{footline}{%
+  \begin{beamercolorbox}[wd=\paperwidth,ht=0.42cm,dp=0.16cm,leftskip=0.4cm,rightskip=0.4cm]{footline}%
+    \usebeamerfont{footline}\color{grisMedio}Matemática 2 -- Unidad 1%
+    \hfill\color{azulMedio}\insertsectionhead%
+    \hfill\color{grafito}\insertframenumber\,/\,\inserttotalframenumber%
+  \end{beamercolorbox}%
+}
+
+% ---------------- Comandos y entornos auxiliares ----------------
+\newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{L}[1]{>{\RaggedRight\arraybackslash}p{#1}}
+
+\newtcolorbox{keybox}[1][]{%
+  colback=azulClaro!40,colframe=azul,arc=2pt,boxrule=0.8pt,
+  top=4pt,bottom=4pt,left=6pt,right=6pt,fonttitle=\bfseries,#1}
+\newtcolorbox{techbox}[1][]{%
+  colback=tealClaro!45,colframe=tealProfundo,arc=2pt,boxrule=0.8pt,
+  top=4pt,bottom=4pt,left=6pt,right=6pt,fonttitle=\bfseries,#1}
+\newtcolorbox{warnbox}[1][]{%
+  colback=acentoClaro!70,colframe=acento,arc=2pt,boxrule=0.8pt,
+  top=4pt,bottom=4pt,left=6pt,right=6pt,fonttitle=\bfseries,#1}
+\newtcolorbox{envbox}[1][]{%
+  colback=grisClaro,colframe=azulMedio,arc=2pt,boxrule=0.8pt,
+  top=4pt,bottom=4pt,left=6pt,right=6pt,title=Contexto ambiental,fonttitle=\bfseries,#1}
+\newtcolorbox{checkbox}[1][]{%
+  colback=alertaClara!55,colframe=alerta,arc=2pt,boxrule=0.8pt,
+  top=4pt,bottom=4pt,left=6pt,right=6pt,title=Comprobación rápida,fonttitle=\bfseries,#1}
+\newtcolorbox{examplebox}[1][]{%
+  colback=tealClaro!40,colframe=tealProfundo,arc=2pt,boxrule=0.8pt,
+  top=4pt,bottom=4pt,left=6pt,right=6pt,fonttitle=\bfseries,#1}
+
+% Divisor de bloque temático (marca además la sección para el pie de pagina)
+\newcommand{\bloque}[3]{%
+\section{#1}
+\begin{frame}[plain,noframenumbering]
+  \begin{tikzpicture}[remember picture,overlay]
+    \fill[azul] (current page.south west) rectangle (current page.north east);
+    \fill[azulMedio] (current page.south west) rectangle ([xshift=0.55cm]current page.north west);
+    \fill[acento,opacity=.30] ([xshift=-0.4cm,yshift=-0.5cm]current page.north east) circle (3.1cm);
+    \node[anchor=west,align=left,text width=12.6cm] at ([xshift=1.1cm]current page.west) {%
+      \begin{minipage}[c]{12.6cm}
+        \raggedright
+        {\color{white}\Large\bfseries #1}\\[3pt]
+        {\color{white}\LARGE\bfseries #2}\\[6pt]
+        {\color{azulClaro}\normalsize #3}
+      \end{minipage}%
+    };
+  \end{tikzpicture}
+\end{frame}}
+
+% ---------------- Datos del documento ----------------
+\title[Unidad 1 -- Matemática 2]{Matemática 2}
+\subtitle{Unidad 1. Cálculo diferencial y fundamentos del cálculo integral}
+\author[Chuncho Morocho, C. G.]{Carlos Guillermo Chuncho Morocho}
+\institute[Ingeniería Ambiental]{Carrera de Ingeniería Ambiental \\ Universidad Nacional de Loja}
+\date{}
+
+\setbeamertemplate{title page}{
+  \begin{center}
+  \vspace{0.15cm}
+  {\includegraphics[width=0.16\textwidth]{recursos/logo_carrera.jpg}\par}
+  \vspace{0.35cm}
+  {\usebeamerfont{title}\color{azul}\inserttitle\par}
+  \vspace{0.15cm}
+  {\large\color{azul}\textbf{\insertsubtitle}\par}
+  \vspace{0.55cm}
+  {\usebeamerfont{author}\insertauthor\par}
+  \vspace{0.15cm}
+  {\small\insertinstitute\par}
+  \vspace{0.45cm}
+  {\color{acento}\rule{0.55\textwidth}{1pt}\par}
+  \end{center}
+}
+
+\begin{document}
+\shorthandoff{"}
+
+% ============================================================
+% Portada
+% ============================================================
+\begin{frame}[plain,noframenumbering]
+  \titlepage
+\end{frame}
+
+% ============================================================
+% Presentación del curso: profesor y panorama de las 3 unidades
+% ============================================================
+\begin{frame}{Presentación}
+\framesubtitle{Bienvenida al curso — Quién los acompaña y qué construiremos juntos este semestre}
+
+\scriptsize
+\begin{columns}[T,onlytextwidth]
+
+\column{0.34\textwidth}
+\begin{block}{Formación académica}
+\begin{itemize}[itemsep=0.5pt,topsep=1pt]
+  \item Ing. Agrónomo (UNL, 2004).
+  \item 2 maestrías previas: Cs. de la Agricultura (PUC Chile, 2017) y Agric. Ecológica (CATIE, 2011).
+  \item Dipl. Sup. en Gestión de Proyectos (FLACSO, 2005).
+  \item \textbf{Maestría en Estadística}, m. Ciencia de Datos e IA.
+\end{itemize}
+\end{block}
+
+\column{0.32\textwidth}
+\begin{envbox}[title=Trayectoria]
+Docente e investigador desde 2004; tiempo completo en la UNL desde 2018.
+11 periodos de Matemática (I y II) y 12 de Estadística, en Ingeniería Ambiental.
+\end{envbox}
+
+\column{0.31\textwidth}
+\begin{techbox}[title=Investigación actual]
+Modelación probabilística y espacio-temporal de incendios forestales en Loja
+(jerárquica, Bernoulli, Matérn/SPDE). Publicaciones en \textit{Fire Ecology}
+(2026), \textit{Axioma} (2025) y \textit{Rev. Est. Andaluces} (2024).
+\end{techbox}
+
+\end{columns}
+
+\vspace{0.04cm}
+
+\begin{keybox}[top=2pt,bottom=2pt]
+\textbf{Este período dicto además:} Estadística Descriptiva, Programación y Base de Datos,
+y Formulación del Proyecto de Titulación.
+\end{keybox}
+
+\vspace{0.03cm}
+
+\centering
+\scriptsize
+Carrera de Ingeniería Ambiental, Bloque 86
+\quad$\vert$\quad
+\texttt{carlos.chuncho@unl.edu.ec}
+
+\end{frame}
+
+
+
+
+\begin{frame}{Unidad 1 -- Cálculo diferencial y fundamentos del cálculo integral}
+\framesubtitle{6 semanas \quad\textbullet\quad 45,0 horas}
+\begin{enumerate}
+  \item La integral indefinida: antiderivadas y propiedades.
+  \item Áreas y distancias: el problema del área y su vínculo con la integral.
+  \item La integral definida: definición, teoremas y propiedades.
+  \item Teorema Fundamental del Cálculo: primera forma.
+  \item Teorema Fundamental del Cálculo: segunda forma.
+  \item Regla básica de sustitución.
+\end{enumerate}
+\vspace{0.1cm}
+\begin{keybox}
+\textbf{Resultado de aprendizaje:} aplica integrales indefinidas y definidas en el estudio de tasas de cambio y la modelización de fenómenos ambientales.
+\end{keybox}
+\end{frame}
+
+\begin{frame}{Unidad 2 -- Técnicas de integración}
+\framesubtitle{6 semanas \quad\textbullet\quad 45,0 horas}
+\begin{enumerate}
+  \item Integración por sustitución.
+  \item Integración por partes.
+  \item Potencias de funciones trigonométricas.
+  \item Sustituciones trigonométricas.
+  \item Fracciones parciales.
+  \item La integral doble e integrales iteradas.
+\end{enumerate}
+\vspace{0.1cm}
+\begin{keybox}
+\textbf{Resultado de aprendizaje:} conoce las técnicas básicas de integración y, con el Teorema Fundamental del Cálculo, resuelve problemas ambientales con responsabilidad profesional.
+\end{keybox}
+\end{frame}
+
+\begin{frame}{Unidad 3 -- Aplicaciones de la integral}
+\small
+\framesubtitle{4 semanas \quad\textbullet\quad 30,0 horas}
+\begin{enumerate}
+  \item Movimiento rectilíneo: desplazamiento, velocidad y aceleración.
+  \item Volúmenes de sólidos: secciones transversales y sólidos de revolución.
+  \item Trabajo mecánico.
+  \item Presión y fuerza del fluido.
+\end{enumerate}
+\vspace{0.1cm}
+\begin{keybox}
+\textbf{Resultado de aprendizaje:} analiza, mediante el cálculo integral, cómo varía una magnitud en forma continua y determina numéricamente el fenómeno estudiado.
+\end{keybox}
+\end{frame}
+
+% ============================================================
+% Hoja de ruta: proyecto integrador, equipos, cronograma y evaluación
+% ============================================================
+\bloque{Hoja de ruta}{La hoja de ruta del curso}{Proyecto integrador, equipos de trabajo, cronograma y evaluación}
+
+\begin{frame}{El proyecto integrador: un caso ambiental real}
+\small
+\begin{block}{De qué se trata}
+Durante todo el semestre cada equipo trabaja con el mismo conjunto real de datos ambientales georreferenciados del cantón Loja (periodo 2019--2024): relieve y geomorfología, cobertura vegetal, variables hidroclimáticas y dinámicas de cuenca. En Matemática 2, cada bloque temático se resuelve aplicando técnicas de cálculo integral cada vez más avanzadas -de calcular áreas y acumulados simples a modelar procesos con integrales dobles.
+\end{block}
+\vspace{0.15cm}
+\begin{columns}[T,onlytextwidth]
+\column{0.48\textwidth}
+\begin{envbox}
+29 estudiantes del curso se organizan en \textbf{7 equipos de 4 integrantes} (uno de 5), cada uno responsable de un bloque temático del dataset ambiental.
+\end{envbox}
+\column{0.48\textwidth}
+\begin{keybox}
+El proyecto tiene \textbf{3 partes, una por unidad} (formulación $\to$ metodología $\to$ resultados finales), y dentro de cada unidad se evalúa en las mismas \textbf{4 fases}: formulación, avance, producto técnico y defensa individual.
+\end{keybox}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Proyecto integrador: los 7 equipos y su reto}
+\tiny
+\renewcommand{\arraystretch}{1.0}
+\begin{tabularx}{\textwidth}{C{1.6cm}L{2.9cm}Y}
+\toprule
+\textbf{Equipos} & \textbf{Bloque temático (variables)} & \textbf{Pregunta guía en clave de cálculo integral} \\
+\midrule
+1 y 2 & Relieve y accesibilidad: elevación, pendiente, orientación, distancia a asentamientos y vías. & ¿Cuál es el área bajo el perfil de elevación de una ladera y qué distancia acumulada recorre una ruta de acceso? \\
+3 y 4 & Cobertura vegetal y uso del suelo: bosque nativo, páramo, área agropecuaria, plantación forestal, índices espectrales. & ¿Cómo se acumula el cambio del área de cobertura vegetal en el tiempo, integrando su tasa de variación? \\
+5 y 6 & Clima y condiciones atmosféricas: precipitación acumulada, días secos y húmedos, velocidad del viento. & ¿Cuál es el volumen acumulado de precipitación en un periodo, obtenido como integral de la tasa de lluvia? \\
+7 & Incendios forestales y riesgo: evidencia satelital de fuego y ocurrencia por celda, mes y año. & ¿Cuál es el área acumulada afectada en el tiempo, integrando la tasa de propagación del incendio? \\
+\bottomrule
+\end{tabularx}
+\vspace{0.1cm}
+\begin{keybox}[top=2pt,bottom=2pt]
+\textbf{En una pareja (Equipos 1 y 2, 3 y 4, 5 y 6) NO se reparten las variables:}
+\begin{itemize}[itemsep=0.5pt,topsep=1pt]
+  \item Los dos equipos comparten \textbf{el bloque completo}: mismas variables, misma pregunta guía.
+  \item Cada equipo elige un \textbf{sitio o subconjunto distinto} dentro del cantón Loja (otra ladera, otra zona de cobertura, otra estación climática).
+  \item Al cerrar la unidad, \textbf{comparan sus resultados numéricos} entre sí.
+\end{itemize}
+\textit{Ejemplo (Bloque 1):} Equipo 1 calcula el área bajo el perfil de elevación de una ladera del cantón; Equipo 2 hace el mismo cálculo para otra ladera; ambos comparan qué área resultó mayor y por qué.
+\end{keybox}
+\end{frame}
+
+\begin{frame}{Proyecto integrador -- Parte 1: formulación de la investigación}
+\footnotesize
+\centering
+\renewcommand{\arraystretch}{0.95}
+\begin{tabularx}{\textwidth}{L{2.2cm}C{1.6cm}Y}
+\toprule
+\textbf{Fase} & \textbf{Peso} & \textbf{Qué se evalúa} \\
+\midrule
+1. Formulación & 3\,\% & Delimitación inicial del problema ambiental y del bloque de variables asignado al equipo. \\
+2. Avance & 4\,\% & Exploración preliminar de los datos que sustente la pregunta de investigación. \\
+3. Producto técnico & 10\,\% & Documento formal en \LaTeX{} con normas APA: planteamiento del problema, pregunta de investigación, hipótesis y objetivos (general y específicos). \\
+4. Defensa individual & 8\,\% & Sustentación oral individual del planteamiento: problema, pregunta, hipótesis y objetivos. \\
+\midrule
+\textbf{Total por unidad} & \textbf{25\,\%} & \textbf{2,50 puntos sobre 10,00 en cada unidad.} \\
+\bottomrule
+\end{tabularx}
+\vspace{0.02cm}
+\begin{warnbox}[top=2pt,bottom=2pt]
+Este producto técnico es la \textbf{Parte 1 del proyecto integrador}: la formulación completa que las unidades 2 y 3 retomarán y desarrollarán hasta el informe final.
+\end{warnbox}
+\end{frame}
+
+\begin{frame}{Cronograma -- Unidad 1}
+\scriptsize
+\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\textwidth}{C{1.6cm}L{2.6cm}Y}
+\toprule
+\textbf{Semana} & \textbf{Fechas (lun/jue)} & \textbf{Contenido y proyecto integrador} \\
+\midrule
+1 & 28-sep / 01-oct & Bienvenida, hoja de ruta y formación de los 7 equipos. Introducción a datos ambientales para modelación. La integral indefinida. \\
+2 & 05-oct / 08-oct & Áreas y distancias. \textbf{Fase 1 -- Formulación (3\,\%)}: entrega 08-oct. \\
+3 & 12-oct / 15-oct & La integral definida. \textbf{Fase 2 -- Avance (4\,\%)}: entrega 15-oct. \\
+4 & 19-oct / 22-oct & Teorema Fundamental del Cálculo: primera forma. \textbf{Fase 3 -- Producto técnico (10\,\%)}: entrega 22-oct. \\
+5 & 26-oct / 29-oct & Teorema Fundamental del Cálculo: segunda forma. \textbf{Fase 4 -- Defensa individual (8\,\%)}: 29-oct. \\
+6 & 02-nov / 05-nov & Regla básica de sustitución y síntesis. \textbf{Examen de Unidad 1}: semana del 09-nov. \\
+\bottomrule
+\end{tabularx}
+\vspace{0.15cm}
+\begin{techbox}
+Pase de calificaciones de la Unidad 1: 10-nov al 16-nov-2026.
+\end{techbox}
+\tiny\textit{Fechas oficiales según el calendario institucional 2026--2027 (fuente: reporte de fechas de la asignatura).}
+\end{frame}
+
+\begin{frame}{Cronograma -- Unidad 2}
+\scriptsize
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\textwidth}{C{1.6cm}L{2.6cm}Y}
+\toprule
+\textbf{Semana} & \textbf{Fechas aproximadas} & \textbf{Contenido y proyecto integrador} \\
+\midrule
+1 & 12-nov / 13-nov & Retroalimentación del examen de Unidad 1. Integración por sustitución. \\
+2 & 19-nov / 20-nov & Integración por partes. \textbf{Fase 1 -- Formulación (3\,\%)}. \\
+3 & 26-nov / 27-nov & Potencias de funciones trigonométricas. \textbf{Fase 2 -- Avance (4\,\%)}. \\
+4 & 03-dic / 04-dic & Sustituciones trigonométricas. \textbf{Fase 3 -- Producto técnico (10\,\%)}. \\
+\multicolumn{3}{l}{\textit{Receso académico estimado: 21-dic-2026 al 04-ene-2027 (sin clases).}} \\
+5 & 05-ene / 06-ene & Fracciones parciales. \textbf{Fase 4 -- Defensa individual (8\,\%)}. \\
+6 & 07-ene & Integral doble e integrales iteradas. Síntesis. \textbf{Examen de Unidad 2}. \\
+\bottomrule
+\end{tabularx}
+\vspace{0.15cm}
+\begin{techbox}
+Pase de calificaciones de la Unidad 2: 08-ene al 14-ene-2027.
+\end{techbox}
+\end{frame}
+
+\begin{frame}{Cronograma -- Unidad 3}
+\scriptsize
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\textwidth}{C{1.6cm}L{2.6cm}Y}
+\toprule
+\textbf{Semana} & \textbf{Fechas aproximadas} & \textbf{Contenido y proyecto integrador} \\
+\midrule
+1 & 11-ene / 13-ene & Retroalimentación del examen de Unidad 2. Movimiento rectilíneo. \textbf{Fase 1 -- Formulación (3\,\%)}. \\
+2 & 18-ene / 20-ene & Volúmenes de sólidos. \textbf{Fase 2 -- Avance (4\,\%)}. \\
+3 & 25-ene / 27-ene & Trabajo mecánico. \textbf{Fase 3 -- Producto técnico (10\,\%)}. \\
+4 & 01-feb / 04-feb & Presión y fuerza del fluido. Síntesis del curso. \textbf{Fase 4 -- Defensa individual (8\,\%)} y \textbf{examen de Unidad 3}. \\
+\bottomrule
+\end{tabularx}
+\vspace{0.1cm}
+\begin{techbox}
+Pase de calificaciones de la Unidad 3: 05-feb al 15-feb-2027. Recuperación (quien no alcance 7/10): pase de calificaciones 08 al 12-mar-2027.
+\end{techbox}
+\end{frame}
+
+\begin{frame}{Panorama de evaluación del curso}
+\scriptsize
+\centering
+\renewcommand{\arraystretch}{1.05}
+\begin{tabularx}{\textwidth}{L{2.6cm}Y C{1.8cm}}
+\toprule
+\textbf{Componente} & \textbf{Instrumento} & \textbf{Ponderación} \\
+\midrule
+Evidencias en aula & Micro-retos (4, 0--3) + trabajo técnico (3, 0--3) + sustentación/validación (2, 0--3). & 15\,\% -- 1,50 \\
+Lecciones & Promedio de 3 lecciones individuales (0--10). & 25\,\% -- 2,50 \\
+Proyecto integrador & Formulación 3\,\% + avance 4\,\% + producto técnico 10\,\% + defensa individual 8\,\%. & 25\,\% -- 2,50 \\
+Examen & Evaluación individual de fin de unidad. & 35\,\% -- 3,50 \\
+\midrule
+\textbf{Total por unidad} & & \textbf{100\,\% -- 10,00} \\
+\bottomrule
+\end{tabularx}
+\vspace{0.06cm}
+\begin{keybox}[top=2pt,bottom=2pt]
+Esta estructura se repite, con los mismos pesos, en las 3 unidades (\texttt{calificaciones\_matematica.xlsx}). \textbf{La calificación final es el promedio de las tres unidades.}
+\end{keybox}
+\vspace{0.03cm}
+\begin{warnbox}[top=2pt,bottom=2pt]
+Nota mínima: 7/10. Celda vacía = evidencia pendiente; 0 = evidencia sin presentar -la participación espontánea no suma puntos-. Recuperación solo si se reprueba menos del 20\,\% de horas y no es tercera matrícula.
+\end{warnbox}
+\end{frame}
+
+% ============================================================
+% Motivación: por qué la matemática importa
+% ============================================================
+\begin{frame}{¿Por qué estudiar matemática?}
+\small
+\begin{columns}[T,onlytextwidth]
+\column{0.48\textwidth}
+\begin{block}{En la vida cotidiana}
+\footnotesize
+\begin{itemize}[itemsep=0pt,topsep=1pt]
+  \item Interpretar tasas y gráficos: inflación, interés de un préstamo, consumo de agua o energía.
+  \item Tomar decisiones con datos: comparar precios, calcular rendimientos, planificar un presupuesto.
+  \item Entender la tecnología cotidiana: GPS, redes sociales, pronóstico del clima.
+\end{itemize}
+\end{block}
+\column{0.48\textwidth}
+\begin{envbox}[title=En la vida profesional]
+\footnotesize
+\begin{itemize}[itemsep=0pt,topsep=1pt]
+  \item Todo ingeniero modela: la matemática describe cómo cambian los sistemas reales (caudales, cargas, poblaciones, concentraciones).
+  \item Permite predecir, optimizar y diseñar con criterio técnico, no por ensayo y error.
+  \item Es la base de sus herramientas: hojas de cálculo, software de modelación, análisis de datos, SIG.
+\end{itemize}
+\end{envbox}
+\end{columns}
+\vspace{0.06cm}
+\begin{keybox}[top=2pt,bottom=2pt]
+\footnotesize No se trata de memorizar fórmulas: el cálculo integral de esta unidad es la misma herramienta que usará para cuantificar procesos ambientales reales en cuencas hidrográficas, dinámica de suelos y atmósfera.
+\end{keybox}
+\end{frame}
+
+\begin{frame}{La matemática en la ingeniería ambiental: dos ejemplos}
+\small
+\begin{block}{Ejemplo 1 -- Diseño de drenaje urbano y control de inundaciones}
+Un ingeniero ambiental integra la curva de intensidad de lluvia en el tiempo (el hidrograma de una tormenta) para obtener el volumen total de escorrentía que debe evacuar un sistema de alcantarillado. Ese volumen acumulado -el área bajo la curva de lluvia- es el que define el diámetro de las tuberías y evita inundaciones en la ciudad.
+\end{block}
+\vspace{0.15cm}
+\begin{block}{Ejemplo 2 -- Cuantificación de carbono capturado por un bosque}
+Para certificar un proyecto de conservación o reforestación, se integra la tasa de crecimiento de biomasa de la vegetación a lo largo de varios años. El resultado es el carbono total capturado, un valor central en proyectos de mitigación del cambio climático y mercados de carbono.
+\end{block}
+\vspace{0.1cm}
+\begin{keybox}[top=2pt,bottom=2pt]
+En ambos casos el problema es el mismo que domina esta unidad: pasar de una \textbf{tasa que cambia en el tiempo} a un \textbf{total acumulado}, mediante una integral.
+\end{keybox}
+\end{frame}
+
+\begin{frame}{Un motivo más antes de empezar}
+\centering
+\begin{tcolorbox}[colback=azul,colframe=azulOsc,arc=4pt,boxrule=1pt,
+  width=9.3cm,height=2.7cm,valign=center,halign=center]
+  {\color{white}\large$\blacktriangleright$}\\[2pt]
+  {\color{white}\large\bfseries El camino del éxito}\\[1pt]
+  {\color{azulClaro}\footnotesize LuzuVlogs \textbullet\ \href{run:recursos/video_motivacional_camino_del_exito.mp4}{\underline{Clic para reproducir}}}
+\end{tcolorbox}
+\vspace{0.15cm}
+\begin{keybox}[top=3pt,bottom=3pt]
+\small La matemática y la ingeniería no son solo fórmulas: son una forma de pensar que abre puertas. Este video es una invitación a disciplinarse y perseguir metas grandes -como las que esta carrera le va a exigir-.
+\end{keybox}
+\end{frame}
+
+% ============================================================
+% Propósito, resultados de aprendizaje y mapa de contenidos
+% ============================================================
+\begin{frame}{Propósito de la Unidad 1}
+\small
+\begin{columns}[T,onlytextwidth]
+\column{0.56\textwidth}
+\begin{block}{En esta unidad}
+Se sientan las bases del cálculo integral: la integral indefinida y definida, el problema del área, el Teorema Fundamental del Cálculo y la sustitución básica, aplicados a tasas de cambio y fenómenos ambientales que contribuyan a una gestión ambiental sostenible.
+\end{block}
+\column{0.40\textwidth}
+\begin{envbox}
+Los ejemplos recorren relieve y accesibilidad, balance hídrico, cobertura vegetal, calidad del aire y dinámica del suelo: los mismos contextos que un ingeniero ambiental modela en campo.
+\end{envbox}
+\end{columns}
+\vspace{0.02cm}
+\begin{keybox}[top=2pt,bottom=2pt]
+\footnotesize\textbf{Resultado de aprendizaje de la unidad:} aplica integrales indefinidas y definidas, utilizándolas en el estudio de tasas de cambio y la modelización de fenómenos ambientales, con compromiso social, ético y profesional.
+\end{keybox}
+\end{frame}
+
+\begin{frame}{Al finalizar la Unidad 1, usted podrá}
+\small
+\begin{enumerate}
+  \item Calcular antiderivadas mediante las propiedades básicas de la integral indefinida.
+  \item Interpretar el área bajo una curva y la distancia recorrida como un límite de sumas.
+  \item Definir la integral definida y aplicar sus propiedades de linealidad y aditividad.
+  \item Aplicar el Teorema Fundamental del Cálculo en su primera forma para evaluar integrales definidas.
+  \item Aplicar el Teorema Fundamental del Cálculo en su segunda forma para derivar funciones definidas por integrales.
+  \item Resolver integrales mediante la regla básica de sustitución en modelos ambientales sencillos.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Mapa de contenidos}
+\centering
+\begin{tikzpicture}[
+  node distance=0.28cm,
+  box/.style={draw=azul,fill=azulClaro!45,rounded corners,minimum width=3.3cm,minimum height=1.3cm,align=center,font=\small\bfseries,text=azulOsc},
+  arr/.style={-{Latex},thick,draw=tealMedio}
+]
+\node[box] (a) {Bloque A\\[2pt]\footnotesize\normalfont Integral\\indefinida};
+\node[box,right=0.9cm of a] (b) {Bloque B\\[2pt]\footnotesize\normalfont Áreas y\\distancias};
+\node[box,right=0.9cm of b] (c) {Bloque C\\[2pt]\footnotesize\normalfont Integral\\definida};
+\node[box,below=of c] (d) {Bloque D\\[2pt]\footnotesize\normalfont TFC\\1\textsuperscript{a} forma};
+\node[box,left=0.9cm of d] (e) {Bloque E\\[2pt]\footnotesize\normalfont TFC\\2\textsuperscript{a} forma};
+\node[box,left=0.9cm of e] (f) {Bloque F\\[2pt]\footnotesize\normalfont Sustitución\\básica};
+\draw[arr] (a) -- (b);
+\draw[arr] (b) -- (c);
+\draw[arr] (c) -- (d);
+\draw[arr] (d) -- (e);
+\draw[arr] (e) -- (f);
+\end{tikzpicture}
+\vspace{0.3cm}
+\begin{techbox}
+\textbf{Lógica de avance:} de la antiderivada (bloque A) hacia el área acumulada (B, C), el vínculo entre ambas ideas (D, E) y una primera técnica para ampliar el repertorio de integrales resolubles (F).
+\end{techbox}
+\end{frame}
+
+% ============================================================
+% BLOQUE A
+% ============================================================
+\bloque{Bloque A}{Fundamentos del Cálculo Integral y la Integral Indefinida}{Definición de integral, significado gráfico, características, propiedades y ejercicios en clase}
+
+\begin{frame}{¿Qué es una integral?: concepto y definición matemática}
+\footnotesize
+\begin{block}{Concepto central: acumulación continua}
+\footnotesize
+La integración es el proceso matemático de \textbf{acumulación continua}. Mientras que la derivada determina una \textbf{tasa de cambio instantánea} ($f'(x) = \lim \frac{\Delta y}{\Delta x}$), la integral resuelve la pregunta inversa: \textbf{\textit{«¿cuánto se ha acumulado en total cuando una tasa varía continuamente?»}}
+\end{block}
+\vspace{0.04cm}
+\begin{columns}[T,onlytextwidth]
+\column{0.48\textwidth}
+\begin{techbox}[title=Definición formal (Leibniz), top=3pt,bottom=3pt]
+\scriptsize
+El símbolo $\int$ es una $S$ estilizada (\textit{summa}). Representa el límite de una suma continua de productos infinitesimales:
+\[
+\int f(x)\,dx = \lim_{\Delta x \to 0} \sum_{i=1}^n f(x_i^*)\,\Delta x
+\]
+Donde $f(x)$ es la tasa y $dx$ es el incremento infinitesimal.
+\end{techbox}
+\column{0.48\textwidth}
+\begin{keybox}[title=Dualidad del cálculo integral, top=3pt,bottom=3pt]
+\scriptsize
+\begin{itemize}[itemsep=2pt]
+  \item \textbf{Integral Indefinida:} Operador inverso de la derivación. Produce una \textbf{familia de funciones} (antiderivadas).
+  \item \textbf{Integral Definida:} Acumulación neta en $[a,b]$. Produce un \textbf{número real} (magnitud acumulada o área neta).
+\end{itemize}
+\end{keybox}
+\end{columns}
+\end{frame}
+
+\begin{frame}{¿Qué es una integral?: interpretación gráfica y geométrica}
+\small
+\begin{columns}[T,onlytextwidth]
+\column{0.50\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.78]
+  \begin{axis}[
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=0, xmax=6.5,
+    ymin=0, ymax=4.4,
+    ticks=none,
+    width=6.5cm, height=3.8cm,
+    enlargelimits=false
+  ]
+    \addplot[domain=0.5:6, samples=100, smooth, thick, draw=azulMedio] {0.1*(x-1)*(x-3)*(x-6) + 2.5};
+    \addplot[domain=1.5:5.2, samples=100, fill=azulClaro!60, opacity=0.7] {0.1*(x-1)*(x-3)*(x-6) + 2.5} \closedcycle;
+    \addplot[domain=3.3:3.6, samples=20, fill=acento!75, opacity=0.9] {0.1*(x-1)*(x-3)*(x-6) + 2.5} \closedcycle;
+    \node[below] at (axis cs:1.5, 0) {\scriptsize $a$};
+    \node[below] at (axis cs:5.2, 0) {\scriptsize $b$};
+    \node[below, text=acento] at (axis cs:3.45, 0) {\tiny $dx$};
+    \node[above right, text=azulMedio] at (axis cs:4.6, 3.1) {\scriptsize $y=f(x)$};
+    \node[text=azul] at (axis cs:2.5, 1.2) {\scriptsize $A = \int_a^b f(x)\,dx$};
+    \node[above, text=acento] at (axis cs:3.45, 2.7) {\tiny $dA = f(x)\,dx$};
+  \end{axis}
+\end{tikzpicture}
+\column{0.48\textwidth}
+\begin{block}{Interpretación geométrica y física}
+\footnotesize
+\textbf{1. Geométrica:} Área bajo la curva $y=f(x)$ en $[a,b]$. Suma continua de franjas infinitesimales de área diferencial:
+\[
+dA = f(x)\,dx \implies A = \int_a^b f(x)\,dx
+\]
+\textbf{2. Física y ambiental:} Si $f(t)$ es tasa de flujo:
+\begin{itemize}[itemsep=1pt]
+  \item Caudal $Q(t)$ ($m^3/s$) $\to$ Volumen $V = \int Q(t)\,dt$.
+  \item Lluvia $i(t)$ ($mm/h$) $\to$ Precipitación total $P = \int i(t)\,dt$.
+  \item Emisión $r(t)$ ($kg/h$) $\to$ Masa $M = \int r(t)\,dt$.
+\end{itemize}
+\end{block}
+\end{columns}
+\end{frame}
+
+\begin{frame}{La antiderivada: el camino inverso del cálculo}
+\small
+\begin{block}{Definición de antiderivada (o primitiva)}
+Una función $F(x)$ se denomina \textbf{antiderivada} de $f(x)$ sobre un intervalo $I$ si se cumple la relación:
+\[
+F'(x) = \frac{d}{dx}[F(x)] = f(x), \qquad \forall x \in I
+\]
+\end{block}
+\vspace{0.06cm}
+\begin{columns}[T,onlytextwidth]
+\column{0.48\textwidth}
+\begin{examplebox}[title=Ejemplo de reversión directa]
+\footnotesize
+Si $f(x) = 3x^2$, buscamos una función cuya derivada sea $3x^2$:
+\begin{itemize}[itemsep=1.5pt]
+  \item $F_1(x) = x^3 \implies F_1'(x) = 3x^2$ \checkmark
+  \item $F_2(x) = x^3 + 5 \implies F_2'(x) = 3x^2$ \checkmark
+  \item $F_3(x) = x^3 - \pi \implies F_3'(x) = 3x^2$ \checkmark
+\end{itemize}
+\end{examplebox}
+\column{0.48\textwidth}
+\begin{warnbox}[title=Observación clave]
+\footnotesize
+¡No existe una sola antiderivada! Cualquier función de la forma:
+\[
+F(x) = x^3 + C
+\]
+es una antiderivada válida para $f(x) = 3x^2$, ya que la derivada de una constante es idénticamente cero.
+\end{warnbox}
+\end{columns}
+\end{frame}
+
+\begin{frame}{La integral indefinida: notación y estructura}
+\small
+\begin{block}{Definición de integral indefinida}
+La \textbf{integral indefinida} de $f(x)$ es la colección o conjunto de \textbf{todas las posibles antiderivadas} de $f$:
+\[
+\int f(x)\,dx = F(x) + C, \qquad C \in \mathbb{R}
+\]
+\end{block}
+\vspace{0.06cm}
+\begin{columns}[T,onlytextwidth]
+\column{0.48\textwidth}
+\begin{techbox}[title=Anatomía de la notación]
+\footnotesize
+\begin{itemize}[itemsep=2pt]
+  \item $\displaystyle\int$: Operador integral (invitación a sumar).
+  \item $f(x)$: \textbf{Integrando} (tasa instantánea a integrar).
+  \item $dx$: \textbf{Diferencial} (indica la variable activa).
+\end{itemize}
+\end{techbox}
+\column{0.48\textwidth}
+\begin{keybox}[title=Elementos de la solución]
+\footnotesize
+\begin{itemize}[itemsep=2pt]
+  \item $F(x)$: \textbf{Antiderivada particular} ($F'(x)=f(x)$).
+  \item $C$: \textbf{Constante de integración} ($C \in \mathbb{R}$).
+  \item $F(x)+C$: \textbf{Primitiva general} (familia de curvas).
+\end{itemize}
+\end{keybox}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Características fundamentales de la integral indefinida (Parte 1)}
+\small
+\begin{block}{1. Naturaleza del resultado: Familia infinita de funciones}
+A diferencia de la derivada o de la integral definida (que devuelven una función concreta o un número real escalar), la integral indefinida produce un \textbf{conjunto infinito de funciones} que difieren entre sí únicamente por una traslación vertical.
+\end{block}
+\vspace{0.08cm}
+\begin{block}{2. Rol inexcusable de la constante de integración $C$}
+Dado que $\frac{d}{dx}[C] = 0$ para todo $C \in \mathbb{R}$:
+\[
+\frac{d}{dx}\big[F(x) + C\big] = F'(x) + 0 = f(x)
+\]
+\begin{itemize}[itemsep=2pt]
+  \item Omitir $+C$ significa reportar una sola solución cuando en realidad existen infinitas.
+  \item En ingeniería, omitir $C$ anula la capacidad de calibrar un modelo con datos reales de campo.
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Características fundamentales de la integral indefinida (Parte 2)}
+\small
+\begin{block}{3. Operador inverso bidireccional de la derivada}
+Integración y derivación son procesos inversos:
+\[
+\frac{d}{dx}\left[ \int f(x)\,dx \right] = f(x) \qquad \text{y} \qquad \int \left( \frac{d}{dx} F(x) \right) dx = F(x) + C
+\]
+\end{block}
+\vspace{0.06cm}
+\begin{columns}[T,onlytextwidth]
+\column{0.48\textwidth}
+\begin{techbox}[title=4. Linealidad estricta]
+\footnotesize
+Es un operador lineal:
+\begin{itemize}[itemsep=1pt]
+  \item Extrae constantes: $\int k f = k\int f$.
+  \item Distribuye en sumas: $\int(f\pm g) = \int f \pm \int g$.
+\end{itemize}
+\end{techbox}
+\column{0.48\textwidth}
+\begin{keybox}[title=5. Unicidad por PVI]
+\footnotesize
+Para seleccionar \textbf{una sola curva} de la familia, se necesita una \textbf{condición inicial} $(x_0, y_0)$ que determina unívocamente el valor de $C$.
+\end{keybox}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Significado gráfico: familia de curvas y tangentes paralelas}
+\small
+\begin{columns}[T,onlytextwidth]
+\column{0.48\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.78]
+  \begin{axis}[
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-2.2, xmax=2.4,
+    ymin=-2.0, ymax=4.6,
+    ticks=none,
+    width=6.5cm, height=3.8cm,
+    enlargelimits=false
+  ]
+    \addplot[domain=-2.0:2.0, samples=50, thick, draw=azulMedio!55] {x^2 - 1.4} node[right, pos=0.96] {\tiny $C=-1.4$};
+    \addplot[domain=-1.9:1.9, samples=50, thick, draw=azulMedio] {x^2} node[right, pos=0.96] {\tiny $C=0$};
+    \addplot[domain=-1.7:1.7, samples=50, thick, draw=azulMedio!85] {x^2 + 1.4} node[right, pos=0.96] {\tiny $C=1.4$};
+    
+    \draw[dashed, thick, draw=alerta] (axis cs:1, -1.8) -- (axis cs:1, 4.2);
+    \node[below, text=alerta] at (axis cs:1, -1.8) {\scriptsize $x_0 = 1$};
+    
+    \addplot[domain=0.3:1.7, samples=10, draw=acento, thick] {2*(x-1) - 0.4};
+    \addplot[domain=0.3:1.7, samples=10, draw=acento, thick] {2*(x-1) + 1.0};
+    \addplot[domain=0.3:1.7, samples=10, draw=acento, thick] {2*(x-1) + 2.4};
+  \end{axis}
+\end{tikzpicture}
+\column{0.50\textwidth}
+\begin{block}{Para $f(x) = 2x \implies F(x) = x^2 + C$}
+\footnotesize
+\textbf{Propiedades geométricas:}
+\begin{itemize}[itemsep=2pt]
+  \item Cada $C$ traslada verticalmente la curva base $y=x^2$.
+  \item En cualquier vertical $x=x_0$ (ej. $x_0=1$), las rectas tangentes son \textbf{estrictamente paralelas}.
+  \item Misma pendiente: $m = f(x_0) = 2(1) = 2$.
+  \item Una \textbf{condición inicial} fija una sola parábola.
+\end{itemize}
+\end{block}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Propiedades de la integral indefinida: linealidad}
+\footnotesize
+\begin{block}{Axiomas de linealidad del operador integral}
+\scriptsize
+El operador $\int \cdots dx$ es una transformación lineal sobre el espacio de funciones reales:
+\end{block}
+\vspace{0.04cm}
+\begin{columns}[T,onlytextwidth]
+\column{0.48\textwidth}
+\begin{techbox}[title=1. Homogeneidad (Factor constante), top=3pt,bottom=3pt]
+\scriptsize
+Las constantes multiplicativas se extraen fuera del signo integral:
+\[
+\int k\,f(x)\,dx = k\int f(x)\,dx, \quad k\neq 0
+\]
+\end{techbox}
+\column{0.48\textwidth}
+\begin{techbox}[title=2. Aditividad (Suma y resta), top=3pt,bottom=3pt]
+\scriptsize
+La integral de una suma o resta es la suma o resta de las integrales:
+\[
+\int [f(x)\pm g(x)]\,dx = \int f(x)\,dx \pm \int g(x)\,dx
+\]
+\end{techbox}
+\end{columns}
+\vspace{0.04cm}
+\begin{keybox}[title=Linealidad global y constante única $C$, top=2pt,bottom=2pt]
+\scriptsize
+\[
+\int \left[ c_1 f_1(x) + c_2 f_2(x) \right] dx = c_1\int f_1(x)\,dx + c_2\int f_2(x)\,dx
+\]
+Las constantes generadas por cada término se condensan siempre en una \textbf{única constante $C \in \mathbb{R}$}.
+\end{keybox}
+\end{frame}
+
+\begin{frame}{Tabla de integrales inmediatas fundamentales}
+\scriptsize
+\begin{columns}[T,onlytextwidth]
+\column{0.49\textwidth}
+\begin{block}{Funciones potenciales y logarítmicas}
+\begin{itemize}[itemsep=2pt]
+  \item \textbf{Potencia general ($n\neq -1$):}
+  \\[1pt]
+  $\displaystyle\int x^n\,dx = \frac{x^{n+1}}{n+1} + C$
+  \item \textbf{Caso logarítmico ($n=-1$):}
+  \\[1pt]
+  $\displaystyle\int \frac{1}{x}\,dx = \ln|x| + C, \quad x\neq 0$
+  \item \textbf{Constante pura ($n=0$):}
+  \\[1pt]
+  $\displaystyle\int k\,dx = k x + C$
+\end{itemize}
+\end{block}
+
+\column{0.49\textwidth}
+\begin{block}{Trascendentes y trigonométricas}
+\begin{itemize}[itemsep=2pt]
+  \item \textbf{Exponenciales:}
+  \\[1pt]
+  $\displaystyle\int e^x\,dx = e^x + C, \quad \int a^x\,dx = \frac{a^x}{\ln a} + C$
+  \item \textbf{Trigonométricas básicas:}
+  \begin{align*}
+    \int \cos x\,dx &= \sin x + C \\
+    \int \sin x\,dx &= -\cos x + C \\
+    \int \sec^2 x\,dx &= \tan x + C
+  \end{align*}
+\end{itemize}
+\end{block}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Fase 1: Aplicación de propiedades (Linealidad pura - Polinomio)}
+\footnotesize
+\begin{examplebox}[title=Ejemplo guiado 1: Descomposición formal de un polinomio, top=3pt,bottom=3pt]
+\footnotesize
+Aplicar estrictamente las propiedades de linealidad para: \quad $\displaystyle\int \left( 7x^4 - 5x^3 + 3x^2 - 8x + 6 \right) dx$
+\begin{itemize}[itemsep=3pt]
+  \item \textbf{Paso 1 (Aditividad y sustracción):} separar en integrales individuales:
+  \\[2pt]
+  $\displaystyle = \int 7x^4\,dx - \int 5x^3\,dx + \int 3x^2\,dx - \int 8x\,dx + \int 6\,dx$
+  \item \textbf{Paso 2 (Homogeneidad / Factor constante):} extraer cada coeficiente numérico:
+  \\[2pt]
+  $\displaystyle = 7\int x^4\,dx - 5\int x^3\,dx + 3\int x^2\,dx - 8\int x\,dx + 6\int dx$
+\end{itemize}
+\end{examplebox}
+\vspace{0.04cm}
+\begin{keybox}[title=Justificación de la constante única $C$, top=2pt,bottom=2pt]
+\scriptsize
+Cada integral genera una constante ($7C_1 - 5C_2 + 3C_3 - 8C_4 + 6C_5$). Como cualquier combinación lineal de constantes reales es una constante real arbitraria, se condensa siempre en un único término $+C \in \mathbb{R}$.
+\end{keybox}
+\end{frame}
+
+\begin{frame}{Fase 1: Aplicación de propiedades (Linealidad pura - Términos mixtos)}
+\footnotesize
+\begin{examplebox}[title=Ejemplo guiado 2: Funciones de distinta naturaleza, top=3pt,bottom=3pt]
+\footnotesize
+Descomponer aplicando linealidad (sin evaluar integrales aún):
+\[
+\int \left( 4\sqrt{x} - 3e^x + \frac{5}{x} - 2\cos x + 6\sec^2 x \right) dx
+\]
+\begin{itemize}[itemsep=3pt]
+  \item \textbf{Paso 1 (Reescritura de raíz):} $\sqrt{x} = x^{1/2}$.
+  \item \textbf{Paso 2 (Separación aditiva):}
+  \\[2pt]
+  $\displaystyle = \int 4x^{1/2}\,dx - \int 3e^x\,dx + \int \frac{5}{x}\,dx - \int 2\cos x\,dx + \int 6\sec^2 x\,dx$
+  \item \textbf{Paso 3 (Extracción de factores constantes):}
+  \\[2pt]
+  $\displaystyle = 4\int x^{1/2}\,dx - 3\int e^x\,dx + 5\int \frac{1}{x}\,dx - 2\int \cos x\,dx + 6\int \sec^2 x\,dx$
+\end{itemize}
+\end{examplebox}
+\vspace{0.04cm}
+\begin{techbox}[top=2pt,bottom=2pt]
+\scriptsize \textbf{Conclusión metodológica:} La linealidad no depende del tipo de función; desacopla el integrando en piezas elementales que se resuelven por tablas directas.
+\end{techbox}
+\end{frame}
+
+\begin{frame}{Fase 1: Aplicación de propiedades con reescritura algebraica}
+\footnotesize
+\begin{alertblock}{¡Alerta: La integral NO es distributiva ante productos ni cocientes!}
+\scriptsize
+$\int [u(x)\cdot v(x)]\,dx \neq \int u(x)\,dx \cdot \int v(x)\,dx \qquad\text{y}\qquad \int \frac{u(x)}{v(x)}\,dx \neq \frac{\int u(x)\,dx}{\int v(x)\,dx}$.
+Se debe \textbf{desarrollar algebraicamente} el integrando primero.
+\end{alertblock}
+\vspace{0.04cm}
+\begin{examplebox}[title=Ejemplo guiado 3: Reescritura antes de linealidad, top=2pt,bottom=2pt]
+\scriptsize
+\textbf{Caso A (Producto / Binomio al cuadrado):}
+\[
+\int (3x - 2)^2\,dx = \int (9x^2 - 12x + 4)\,dx = 9\int x^2\,dx - 12\int x\,dx + 4\int dx
+\]
+\textbf{Caso B (Cociente con denominador monomio):}
+\[
+\int \frac{6x^4 - 4\sqrt{x} + 5}{x^2}\,dx = \int \left( 6x^2 - 4x^{-3/2} + 5x^{-2} \right) dx = 6\int x^2\,dx - 4\int x^{-3/2}\,dx + 5\int x^{-2}\,dx
+\]
+\end{examplebox}
+\end{frame}
+
+\begin{frame}{Fase 2: Ejercicios para clase (Algebraicas y radicales)}
+\small
+\begin{block}{Ejercicio 1: Cálculo completo paso a paso}
+Calcular: \quad $\displaystyle\int \left( 6x^5 - 4\sqrt[3]{x} + \frac{5}{x^3} - 7 \right) dx$
+\end{block}
+\vspace{0.06cm}
+\begin{techbox}[title=Resolución detallada]
+\footnotesize
+\begin{itemize}[itemsep=2pt]
+  \item \textbf{1. Reescritura:} $\displaystyle\int \left( 6x^5 - 4x^{1/3} + 5x^{-3} - 7 \right) dx$
+  \item \textbf{2. Linealidad:} $6\displaystyle\int x^5\,dx - 4\int x^{1/3}\,dx + 5\int x^{-3}\,dx - 7\int dx$
+  \item \textbf{3. Integración:} $6\left(\frac{x^6}{6}\right) - 4\left(\frac{x^{4/3}}{4/3}\right) + 5\left(\frac{x^{-2}}{-2}\right) - 7x + C$
+  \item \textbf{4. Simplificación:} $= x^6 - 3\sqrt[3]{x^4} - \dfrac{5}{2x^2} - 7x + C$
+\end{itemize}
+\end{techbox}
+\end{frame}
+
+\begin{frame}{Fase 2: Ejercicios para clase (Productos y cocientes)}
+\small
+\begin{block}{Ejercicio 2: Reescritura y cálculo completo}
+Resolver: \quad $\displaystyle\int \frac{(2x+1)(x-3)}{\sqrt{x}}\,dx$
+\end{block}
+\vspace{0.06cm}
+\begin{techbox}[title=Resolución paso a paso]
+\footnotesize
+\begin{itemize}[itemsep=2pt]
+  \item \textbf{1. Expansión del numerador:} $(2x+1)(x-3) = 2x^2 - 5x - 3$.
+  \item \textbf{2. División término a término ($\sqrt{x}=x^{1/2}$):}
+  $\dfrac{2x^2 - 5x - 3}{x^{1/2}} = 2x^{3/2} - 5x^{1/2} - 3x^{-1/2}$.
+  \item \textbf{3. Linealidad e integración:}
+  $2\left( \frac{x^{5/2}}{5/2} \right) - 5\left( \frac{x^{3/2}}{3/2} \right) - 3\left( \frac{x^{1/2}}{1/2} \right) + C$.
+  \item \textbf{4. Resultado final simplificado:}
+  $= \dfrac{4}{5}x^{5/2} - \dfrac{10}{3}x^{3/2} - 6x^{1/2} + C = \dfrac{4}{5}\sqrt{x^5} - \dfrac{10}{3}\sqrt{x^3} - 6\sqrt{x} + C$.
+\end{itemize}
+\end{techbox}
+\end{frame}
+
+\begin{frame}{Fase 2: Ejercicios para clase (Exponenciales y trigonométricas)}
+\small
+\begin{block}{Ejercicio 3: Funciones trascendentes combinadas}
+Resolver: \quad $\displaystyle\int \left( 5e^x + \frac{4}{x} - 3\cos x + 2\sec^2 x \right) dx$
+\end{block}
+\vspace{0.06cm}
+\begin{techbox}[title=Resolución paso a paso]
+\footnotesize
+\begin{itemize}[itemsep=2.5pt]
+  \item \textbf{1. Aplicar propiedades de linealidad:}
+  \[
+  = 5\int e^x\,dx + 4\int \frac{1}{x}\,dx - 3\int \cos x\,dx + 2\int \sec^2 x\,dx
+  \]
+  \item \textbf{2. Evaluar antiderivadas inmediatas:}
+  \[
+  = 5e^x + 4\ln|x| - 3\sin x + 2\tan x + C
+  \]
+\end{itemize}
+\end{techbox}
+\end{frame}
+
+\begin{frame}{Fase 2: Trabajo activo en clase (Ejercicios en parejas)}
+\small
+\begin{columns}[T,onlytextwidth]
+\column{0.48\textwidth}
+\begin{checkbox}[title=Reto 1: Potencias y raíces]
+\footnotesize
+Calcular paso a paso:
+\[
+\int \left( 5x^4 - \frac{3}{\sqrt{x}} + 2x \right) dx
+\]
+\textbf{Solución guiada:}
+\begin{align*}
+  &= 5\left(\frac{x^5}{5}\right) - 3\left(\frac{x^{1/2}}{1/2}\right) + 2\left(\frac{x^2}{2}\right) + C \\
+  &= x^5 - 6\sqrt{x} + x^2 + C
+\end{align*}
+\end{checkbox}
+
+\column{0.48\textwidth}
+\begin{checkbox}[title=Reto 2: Trascendentes]
+\footnotesize
+Calcular paso a paso:
+\[
+\int \left( 4\sin x + 2^x - \frac{3}{x} \right) dx
+\]
+\textbf{Solución guiada:}
+\begin{align*}
+  &= 4(-\cos x) + \frac{2^x}{\ln 2} - 3\ln|x| + C \\
+  &= -4\cos x + \frac{2^x}{\ln 2} - 3\ln|x| + C
+\end{align*}
+\end{checkbox}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Fase 2: Ejercicios para clase (PVI en Ingeniería Ambiental)}
+\small
+\begin{block}{Problema ambiental: Infiltración de agua en suelos de cuenca}
+\footnotesize
+La tasa de infiltración de agua en el suelo durante una lluvia en Loja es $f(t) = 8 - 2\sqrt{t}$ (litros/hora) para $t \in [0, 9]$ h. Si al inicio ($t=0$) el volumen infiltrado acumulado es nulo ($V(0) = 0$):
+\textbf{1.} Encuentre $V(t)$. \quad \textbf{2.} Calcule el volumen infiltrado tras 4 horas.
+\end{block}
+\vspace{0.04cm}
+\begin{techbox}[title=Resolución detallada del PVI]
+\footnotesize
+\begin{itemize}[itemsep=1.5pt]
+  \item \textbf{Integral general:} $V(t) = \int (8 - 2t^{1/2})\,dt = 8t - 2\left(\frac{t^{3/2}}{3/2}\right) + C = 8t - \frac{4}{3}t^{3/2} + C$.
+  \item \textbf{Condición inicial:} $V(0) = 8(0) - \frac{4}{3}(0)^{3/2} + C = 0 \implies C = 0$.
+  \item \textbf{Solución particular:} $V(t) = 8t - \frac{4}{3}t^{3/2}$ litros.
+  \item \textbf{Evaluación en $t=4$ h:} $V(4) = 8(4) - \frac{4}{3}(4^{3/2}) = 32 - \frac{4}{3}(8) = 32 - \frac{32}{3} = \frac{64}{3} \approx 21.33\text{ L}$.
+\end{itemize}
+\end{techbox}
+\end{frame}
+
+\begin{frame}{Comprobación rápida y síntesis del Bloque A}
+\small
+\begin{checkbox}[title=Pregunta de verificación conceptual]
+\footnotesize
+Si la tasa de crecimiento de biomasa es $r(t) = 4t + 3$ (kg/mes) y la biomasa inicial en $t=0$ es $B(0) = 25$ kg, ¿cuál es la función de biomasa $B(t)$?
+\hfill \textbf{Rpta:} $B(t) = 2t^2 + 3t + 25$ kg.
+\end{checkbox}
+\vspace{0.04cm}
+\begin{techbox}[title=Síntesis conceptual del Bloque A]
+\footnotesize
+\begin{itemize}[itemsep=1.5pt]
+  \item \textbf{Concepto de integral:} Acumulación continua y área bajo la curva $y=f(x)$.
+  \item \textbf{Integral indefinida:} Familia infinita de primitivas $F(x)+C$; el término $+C$ es inexcusable.
+  \item \textbf{Linealidad estricta:} Distribuye en sumas y extrae escalares; productos y cocientes exigen reescritura previa.
+  \item \textbf{PVI:} La condición inicial selecciona la curva física real dentro de la familia infinita.
+\end{itemize}
+\end{techbox}
+\end{frame}
+
+% ============================================================
+% BLOQUE B
+% ============================================================
+\bloque{Bloque B}{Áreas y distancias}{El problema del área y su vínculo con la integral}
+
+\begin{frame}{El problema del área}
+\small
+\textbf{Idea central:} aproximar el área bajo una curva $f(x)\geq 0$ en $[a,b]$ mediante una suma de rectángulos, y refinar la aproximación con más rectángulos cada vez más angostos.
+\vspace{0.15cm}
+\[
+A \approx \sum_{i=1}^{n} f(x_i^*)\,\Delta x, \qquad \Delta x = \frac{b-a}{n}
+\]
+\begin{itemize}
+  \item A esta suma se le llama \textbf{suma de Riemann}.
+  \item Cuando $n\to\infty$ (y $\Delta x \to 0$), la suma converge al área exacta.
+\end{itemize}
+\begin{keybox}
+Esta idea de "sumar franjas cada vez más finas" es la motivación geométrica que conduce a la integral definida (Bloque C).
+\end{keybox}
+\end{frame}
+
+\begin{frame}{La distancia como área bajo la velocidad}
+\small
+Si $v(t)$ es la velocidad de un proceso (por ejemplo, el avance de un frente de agua o el desplazamiento sobre una ruta de acceso), la distancia recorrida entre $t=a$ y $t=b$ es el área bajo la curva $v(t)$.
+\vspace{0.15cm}
+\begin{center}
+\resizebox{0.75\textwidth}{!}{$\displaystyle \text{Velocidad } v(t) \longrightarrow \text{área bajo la curva} \longrightarrow \text{distancia recorrida}$}
+\end{center}
+\vspace{0.15cm}
+\begin{envbox}
+En un estudio de accesibilidad territorial, si la velocidad de desplazamiento sobre una ladera varía con la pendiente, el área bajo la curva de velocidad en el tiempo estima la distancia total recorrida por una ruta de acceso.
+\end{envbox}
+\end{frame}
+
+\begin{frame}{Ejemplo ambiental: área bajo el perfil de una ladera}
+\small
+El perfil de elevación de una ladera del cantón Loja, medido a lo largo de una ruta de acceso, sigue aproximadamente $h(x) = 8 - 0.02x^2$ (metros de elevación relativa), para $x\in[0,20]$ (en cientos de metros).
+\vspace{0.1cm}
+\begin{block}{Aproximación con rectángulos}
+Con $n=4$ subintervalos de ancho $\Delta x = 5$ y evaluando en el extremo izquierdo:
+\[
+A \approx \sum_{i=1}^{4} h(x_i)\,\Delta x = 5\big[h(0)+h(5)+h(10)+h(15)\big]
+\]
+\end{block}
+\begin{keybox}
+Esta suma es solo una \textbf{aproximación}; en el Bloque C se define el valor exacto como un límite cuando $n\to\infty$.
+\end{keybox}
+\end{frame}
+
+\begin{frame}{Comprobación rápida: áreas y distancias}
+\begin{checkbox}
+Un equipo mide la velocidad de infiltración de un frente de agua cada hora durante 4 horas. ¿Qué representa, en términos del fenómeno, la suma de Riemann construida con esos datos?
+\end{checkbox}
+\vspace{0.2cm}
+\begin{keybox}
+\textbf{Respuesta razonada:} representa una \textbf{aproximación del volumen total infiltrado} en esas 4 horas -el área bajo la curva de velocidad de infiltración-. Entre más mediciones (subintervalos más angostos) se tomen, mejor será la aproximación al valor real.
+\end{keybox}
+\end{frame}
+
+\begin{frame}{Síntesis del Bloque B}
+\begin{keybox}
+El área bajo una curva se aproxima con sumas de Riemann: franjas rectangulares cuya suma se acerca al valor exacto a medida que aumentan en número.
+\end{keybox}
+\begin{keybox}
+La distancia recorrida es el área bajo la curva de velocidad; esta misma lógica aplica a cualquier tasa de cambio ambiental acumulada en el tiempo.
+\end{keybox}
+\vspace{0.1cm}
+\textit{A continuación: la integral definida, el límite exacto de estas sumas.}
+\end{frame}
+
+% ============================================================
+% BLOQUE C
+% ============================================================
+\bloque{Bloque C}{La integral definida}{Definición, teoremas y propiedades}
+
+\begin{frame}{Definición de la integral definida}
+\small
+\begin{block}{Definición}
+Si $f$ es continua en $[a,b]$, la \textbf{integral definida} de $f$ de $a$ a $b$ es el límite de las sumas de Riemann cuando $n\to\infty$:
+\end{block}
+\[
+\int_{a}^{b} f(x)\,dx = \lim_{n\to\infty}\sum_{i=1}^{n} f(x_i^*)\,\Delta x
+\]
+\begin{itemize}
+  \item $a$ y $b$: límites de integración (inferior y superior).
+  \item El resultado es un \textbf{número}, a diferencia de la integral indefinida (que es una familia de funciones).
+\end{itemize}
+\begin{keybox}
+Si $f(x)\geq 0$ en $[a,b]$, $\displaystyle\int_a^b f(x)\,dx$ es exactamente el área bajo la curva entre $a$ y $b$.
+\end{keybox}
+\end{frame}
+
+\begin{frame}{Propiedades de la integral definida}
+\footnotesize
+\centering
+\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\textwidth}{L{3.2cm}Y}
+\toprule
+\textbf{Propiedad} & \textbf{Enunciado} \\
+\midrule
+Intervalo nulo & $\displaystyle\int_a^a f(x)\,dx = 0$ \\
+Inversión de límites & $\displaystyle\int_a^b f(x)\,dx = -\int_b^a f(x)\,dx$ \\
+Linealidad & $\displaystyle\int_a^b [f(x)\pm g(x)]\,dx = \int_a^b f(x)\,dx \pm \int_a^b g(x)\,dx$ \\
+Aditividad en intervalos & $\displaystyle\int_a^b f(x)\,dx = \int_a^c f(x)\,dx + \int_c^b f(x)\,dx$ \\
+Comparación & Si $f(x)\leq g(x)$ en $[a,b]$, entonces $\displaystyle\int_a^b f(x)\,dx \leq \int_a^b g(x)\,dx$ \\
+\bottomrule
+\end{tabularx}
+\vspace{0.15cm}
+\begin{keybox}[top=2pt,bottom=2pt]
+La aditividad en intervalos permite, por ejemplo, sumar la carga contaminante acumulada en distintos tramos de un río para obtener el total.
+\end{keybox}
+\end{frame}
+
+\begin{frame}{Ejemplo ambiental: carga contaminante acumulada}
+\small
+La concentración de un contaminante en un efluente (mg/L) multiplicada por el caudal (L/h) da una tasa de carga $c(t)$ (mg/h). La carga total vertida entre las horas $t=0$ y $t=6$ es:
+\[
+C = \int_{0}^{6} c(t)\,dt
+\]
+Si $c(t) = 50 - 5t$ mg/h (la carga disminuye con el tiempo):
+\[
+C = \int_0^6 (50-5t)\,dt = \left[50t - \frac{5t^2}{2}\right]_0^6 = 300 - 90 = 210 \text{ mg}
+\]
+\begin{keybox}
+La integral definida convierte una \textbf{tasa} (mg/h) en una \textbf{cantidad acumulada} (mg) durante un periodo concreto -exactamente lo que exige comparar escenarios o cumplir un límite regulatorio.
+\end{keybox}
+\end{frame}
+
+\begin{frame}{Comprobación rápida: integral definida}
+\begin{checkbox}
+Si $\displaystyle\int_0^{4} p(t)\,dt = 120$ representa la precipitación acumulada (mm) en una microcuenca durante 4 días, y en los dos primeros días cayeron $\int_0^2 p(t)\,dt = 45$ mm, ¿cuánto llovió en los días 3 y 4?
+\end{checkbox}
+\vspace{0.2cm}
+\begin{keybox}
+\textbf{Respuesta razonada:} por la propiedad de \textbf{aditividad en intervalos}, $\int_2^4 p(t)\,dt = \int_0^4 p(t)\,dt - \int_0^2 p(t)\,dt = 120-45=75$ mm.
+\end{keybox}
+\end{frame}
+
+\begin{frame}{Síntesis del Bloque C}
+\begin{keybox}
+La integral definida es el límite exacto de las sumas de Riemann: un número que representa área (si $f\geq 0$) o una cantidad acumulada en un intervalo.
+\end{keybox}
+\begin{keybox}
+Sus propiedades de linealidad y aditividad permiten combinar y comparar acumulados entre distintos periodos o escenarios ambientales.
+\end{keybox}
+\vspace{0.1cm}
+\textit{A continuación: el Teorema Fundamental del Cálculo, el puente entre la integral definida y la antiderivada.}
+\end{frame}
+
+% ============================================================
+% BLOQUE D
+% ============================================================
+\bloque{Bloque D}{Teorema Fundamental del Cálculo: primera forma}{La integral definida evaluada mediante una antiderivada}
+
+\begin{frame}{Enunciado del Teorema Fundamental del Cálculo (1\textsuperscript{a} forma)}
+\small
+\begin{block}{Teorema}
+Si $f$ es continua en $[a,b]$ y $F$ es cualquier antiderivada de $f$, entonces:
+\end{block}
+\[
+\int_{a}^{b} f(x)\,dx = F(b) - F(a)
+\]
+\begin{itemize}
+  \item Este teorema evita calcular límites de sumas de Riemann: basta encontrar \textbf{una} antiderivada y evaluarla en los extremos.
+  \item Conecta directamente el Bloque A (antiderivadas) con el Bloque C (integral definida).
+\end{itemize}
+\begin{keybox}
+En la práctica: para calcular $\int_a^b f(x)\,dx$, se halla $F$ tal que $F'=f$, y se calcula $F(b)-F(a)$.
+\end{keybox}
+\end{frame}
+
+\begin{frame}{Ejemplo ambiental: acumulación de captura de carbono}
+\small
+Una plantación forestal captura carbono a una tasa $r(t) = 2t + 1$ (toneladas/año), con $t$ en años desde su establecimiento. El carbono acumulado entre el año 2 y el año 8 es:
+\[
+\int_{2}^{8} (2t+1)\,dt = \Big[t^2+t\Big]_2^8 = (64+8)-(4+2) = 66 \text{ toneladas}
+\]
+\begin{keybox}
+El Teorema Fundamental del Cálculo permite pasar de una \textbf{tasa de captura} a un \textbf{balance acumulado} entre dos años cualesquiera, sin necesidad de sumar franjas manualmente.
+\end{keybox}
+\end{frame}
+
+\begin{frame}{Comprobación rápida: TFC primera forma}
+\begin{checkbox}
+Si la tasa de remoción de un contaminante en un humedal artificial es $r(t)=100-4t$ (kg/día), ¿cuántos kilogramos se remueven entre el día 0 y el día 10?
+\end{checkbox}
+\vspace{0.2cm}
+\begin{keybox}
+\textbf{Respuesta razonada:} $\displaystyle\int_0^{10}(100-4t)\,dt = \big[100t-2t^2\big]_0^{10} = 1000-200 = 800$ kg removidos en 10 días.
+\end{keybox}
+\end{frame}
+
+\begin{frame}{Síntesis del Bloque D}
+\begin{keybox}
+El Teorema Fundamental del Cálculo (1\textsuperscript{a} forma) permite evaluar una integral definida como $F(b)-F(a)$, usando cualquier antiderivada $F$ de $f$.
+\end{keybox}
+\begin{keybox}
+Este resultado convierte balances acumulados (carbono, contaminantes, agua) en un simple cálculo de diferencias.
+\end{keybox}
+\vspace{0.1cm}
+\textit{A continuación: la segunda forma del teorema, que define funciones a partir de integrales con límite variable.}
+\end{frame}
+
+% ============================================================
+% BLOQUE E
+% ============================================================
+\bloque{Bloque E}{Teorema Fundamental del Cálculo: segunda forma}{Funciones definidas por integrales y tasas de variación}
+
+\begin{frame}{Enunciado del Teorema Fundamental del Cálculo (2\textsuperscript{a} forma)}
+\small
+\begin{block}{Teorema}
+Si $f$ es continua en $[a,b]$ y se define $g(x) = \displaystyle\int_{a}^{x} f(t)\,dt$, entonces $g$ es derivable y:
+\end{block}
+\[
+g'(x) = f(x)
+\]
+\begin{itemize}
+  \item $g(x)$ acumula el efecto de $f$ desde $a$ hasta un límite superior \textbf{variable} $x$.
+  \item Derivar $g$ recupera la tasa original $f$: integrar y derivar son operaciones inversas.
+\end{itemize}
+\begin{keybox}
+Esta forma es clave para interpretar \textbf{tasas de variación} en procesos de monitoreo ambiental continuo (por ejemplo, cómo cambia un acumulado de precipitación día a día).
+\end{keybox}
+\end{frame}
+
+\begin{frame}{Ejemplo ambiental: tasa de variación en monitoreo de infiltración}
+\small
+Sea $g(x) = \displaystyle\int_{0}^{x} \sqrt{4+t^2}\,dt$ el volumen acumulado de infiltración (m\textsuperscript{3}) hasta el día $x$, con la tasa diaria dada por $\sqrt{4+t^2}$.
+\vspace{0.1cm}
+\begin{block}{Interpretación con el TFC (2\textsuperscript{a} forma)}
+\[
+g'(x) = \sqrt{4+x^2}
+\]
+Sin necesidad de resolver la integral, se sabe que la \textbf{tasa de infiltración en el día $x$} es exactamente $\sqrt{4+x^2}$ m\textsuperscript{3}/día.
+\end{block}
+\begin{keybox}
+Muchas funciones definidas por integrales no tienen antiderivada elemental; aun así, el TFC (2\textsuperscript{a} forma) permite conocer su derivada de forma directa.
+\end{keybox}
+\end{frame}
+
+\begin{frame}{Comprobación rápida: TFC segunda forma}
+\begin{checkbox}
+Si $g(x) = \displaystyle\int_{1}^{x} \ln(t^2+1)\,dt$ representa un acumulado de emisiones hasta el mes $x$, ¿cuál es la tasa de emisión en el mes $x=3$?
+\end{checkbox}
+\vspace{0.2cm}
+\begin{keybox}
+\textbf{Respuesta razonada:} por el TFC (2\textsuperscript{a} forma), $g'(x)=\ln(x^2+1)$, por lo que en $x=3$ la tasa es $g'(3)=\ln(10)\approx 2,30$ (unidades de emisión por mes).
+\end{keybox}
+\end{frame}
+
+\begin{frame}{Síntesis del Bloque E}
+\begin{keybox}
+El Teorema Fundamental del Cálculo (2\textsuperscript{a} forma) muestra que derivar una integral con límite superior variable recupera la función original.
+\end{keybox}
+\begin{keybox}
+Permite interpretar tasas de variación instantáneas en procesos ambientales acumulativos, incluso sin resolver la integral explícitamente.
+\end{keybox}
+\vspace{0.1cm}
+\textit{A continuación: la regla básica de sustitución, una primera técnica para ampliar el repertorio de integrales resolubles.}
+\end{frame}
+
+% ============================================================
+% BLOQUE F
+% ============================================================
+\bloque{Bloque F}{Regla básica de sustitución}{Un primer método para integrar funciones compuestas}
+
+\begin{frame}{La regla de sustitución}
+\small
+\begin{block}{Idea}
+Si $u=g(x)$ es una función derivable y $f$ es continua en el recorrido de $g$, entonces:
+\end{block}
+\[
+\int f(g(x))\,g'(x)\,dx = \int f(u)\,du
+\]
+\begin{enumerate}
+  \item Elegir $u=g(x)$ (la parte "interna" de la composición).
+  \item Calcular $du = g'(x)\,dx$.
+  \item Reescribir la integral en términos de $u$ y resolver.
+  \item Sustituir de regreso $u=g(x)$.
+\end{enumerate}
+\begin{keybox}
+La sustitución busca reconocer un patrón "función y su derivada" dentro del integrando.
+\end{keybox}
+\end{frame}
+
+\begin{frame}{Ejemplo ambiental: sustitución en un modelo de dilución}
+\small
+La concentración de un contaminante en un lago sigue $c(t) = \dfrac{1}{(2t+5)}$, y se requiere $\displaystyle\int c(t)\,dt$.
+\vspace{0.1cm}
+\begin{block}{Solución}
+Sea $u=2t+5 \Rightarrow du = 2\,dt \Rightarrow dt = \dfrac{du}{2}$.
+\[
+\int \frac{1}{2t+5}\,dt = \int \frac{1}{u}\cdot\frac{du}{2} = \frac{1}{2}\ln|u|+C = \frac{1}{2}\ln|2t+5|+C
+\]
+\end{block}
+\begin{keybox}
+Reconocer $2t+5$ como "una sola pieza" ($u$) simplifica una integral que, de otro modo, no encaja en la tabla de integrales inmediatas.
+\end{keybox}
+\end{frame}
+
+\begin{frame}{Comprobación rápida: sustitución básica}
+\begin{checkbox}
+Para calcular $\displaystyle\int 6x\,(3x^2+1)^4\,dx$, ¿qué sustitución $u=g(x)$ simplifica la integral, y por qué?
+\end{checkbox}
+\vspace{0.2cm}
+\begin{keybox}
+\textbf{Respuesta razonada:} se elige $u=3x^2+1$, porque $du=6x\,dx$ aparece exactamente en el integrando. La integral se reduce a $\int u^4\,du = \dfrac{u^5}{5}+C = \dfrac{(3x^2+1)^5}{5}+C$.
+\end{keybox}
+\end{frame}
+
+\begin{frame}{Síntesis del Bloque F}
+\begin{keybox}
+La sustitución $u=g(x)$ reescribe una integral compuesta en una integral inmediata en la variable $u$, para luego volver a la variable original.
+\end{keybox}
+\begin{keybox}
+Reconocer el patrón "función y su derivada" dentro del integrando es la clave para elegir una buena sustitución.
+\end{keybox}
+\vspace{0.1cm}
+\textit{A continuación: cierre de la Unidad 1 y enlace con las técnicas de integración de la Unidad 2.}
+\end{frame}
+
+% ============================================================
+% CIERRE
+% ============================================================
+\bloque{Cierre}{Síntesis integral de la Unidad 1}{De la antiderivada al Teorema Fundamental del Cálculo}
+
+\begin{frame}{Lo que hemos construido}
+\small
+\begin{enumerate}
+  \item \textbf{Bloque A:} la integral indefinida deshace la derivación y produce una familia de antiderivadas.
+  \item \textbf{Bloque B:} el área bajo una curva se aproxima con sumas de Riemann.
+  \item \textbf{Bloque C:} la integral definida es el límite exacto de esas sumas: un número o un acumulado.
+  \item \textbf{Bloque D:} el TFC (1\textsuperscript{a} forma) evalúa $\int_a^b f = F(b)-F(a)$.
+  \item \textbf{Bloque E:} el TFC (2\textsuperscript{a} forma) deriva funciones definidas por integrales.
+  \item \textbf{Bloque F:} la sustitución amplía el repertorio de integrales que sabemos resolver.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Ejercicio de cierre aplicado a ingeniería ambiental}
+\small
+Un equipo técnico analiza la tasa de propagación de un incendio forestal $p(t)$ (hectáreas/día) durante los primeros 5 días del evento en la provincia de Loja.
+\vspace{0.15cm}
+\begin{checkbox}
+¿El equipo debe usar una \textbf{integral indefinida} o una \textbf{integral definida} para reportar el área total quemada en esos 5 días? Justifique con lo aprendido en los bloques C y D.
+\end{checkbox}
+\vspace{0.2cm}
+\begin{keybox}
+\textbf{Respuesta razonada:} una \textbf{integral definida}, $\int_0^5 p(t)\,dt$, porque se pide un número concreto (área acumulada en un intervalo fijo), no una familia de funciones. El TFC (1\textsuperscript{a} forma) permite calcularla si se conoce una antiderivada de $p$.
+\end{keybox}
+\end{frame}
+
+\begin{frame}{Cierre de la Unidad 1}
+\begin{keybox}
+La integral, indefinida o definida, es la herramienta matemática para pasar de una \textbf{tasa de cambio} a una \textbf{cantidad acumulada} -el lenguaje natural de los procesos ambientales.
+\end{keybox}
+\begin{keybox}
+El Teorema Fundamental del Cálculo es el puente que conecta ambas ideas y hace operativo el cálculo integral.
+\end{keybox}
+\vspace{0.1cm}
+\begin{center}
+\Large\textbf{Siguiente paso: técnicas de integración en la Unidad 2}
+\end{center}
+\end{frame}
+
+\end{document}

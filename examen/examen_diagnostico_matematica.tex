@@ -1,0 +1,87 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{geometry}
+\geometry{top=1.0cm,bottom=1.0cm,left=1.3cm,right=1.3cm}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{xcolor}
+
+\definecolor{unlbluelight}{RGB}{0,86,145}
+
+\pagestyle{empty}
+
+\begin{document}
+
+% Encabezado institucional compacto
+\begin{center}
+    {\fontsize{12}{14}\selectfont \textbf{\color{unlbluelight}UNIVERSIDAD NACIONAL DE LOJA}}\\[1.5pt]
+    {\fontsize{9.5}{11}\selectfont \textbf{FACULTAD AGROPECUARIA Y DE RECURSOS NATURALES RENOVABLES}}\\[1.5pt]
+    {\fontsize{9.5}{11}\selectfont \textbf{CARRERA DE COMPUTACIÓN} $\vert$ \textbf{MATEMÁTICA II (CÁLCULO INTEGRAL)}}\\[2.5pt]
+    {\fontsize{10.5}{12}\selectfont \textbf{EVALUACIÓN DIAGNÓSTICA: CONOCIMIENTOS PREVIOS AL CÁLCULO INTEGRAL}}\\[2pt]
+    {\footnotesize \textbf{Ciclo:} Septiembre 2026 -- Febrero 2027 \quad $\vert$ \quad \textbf{Duración:} 60 min \quad $\vert$ \quad \textbf{Puntaje:} 10 puntos (2.0 pts c/u)}
+\end{center}
+
+\vspace{-6pt}
+\noindent\rule{\textwidth}{1.0pt}
+
+\vspace{1pt}
+\noindent\textbf{\footnotesize Estudiante:} \hrulefill \quad \textbf{\footnotesize Fecha:} \underline{\hspace{2.5cm}} \quad \textbf{\footnotesize Paralelo:} \underline{\hspace{1.2cm}}
+
+\vspace{3pt}
+\noindent\textbf{\footnotesize Instrucciones:} \footnotesize Resuelva cada ejercicio justificando detalladamente su procedimiento algebraico y analítico. Se prohíbe el uso de calculadoras programables y dispositivos móviles. Entregar en limpio.
+
+\vspace{-2pt}
+\noindent\rule{\textwidth}{0.5pt}
+
+\vspace{3pt}
+
+\begin{enumerate}[leftmargin=*,itemsep=5pt,topsep=1pt,label=\textbf{\arabic*.}]
+
+    \item \textbf{[Reescritura Algebraica y Potencias -- 2.0 pts]} \\
+    Para integrar funciones algebraicas mediante $\int x^n dx$, es imprescindible transformar radicales y cocientes a sumas de potencias simples $k \cdot x^p$.
+    \begin{enumerate}[label=\alph*),itemsep=1pt,topsep=1pt]
+        \item Descomponga y reescriba en potencias simples $A x^{\alpha} + B x^{\beta} + C x^{\gamma}$:
+        \[
+        f(x) = \frac{6x^4 - 4x\sqrt{x} + 3}{2x^2}
+        \]
+        \item Exprese en la forma de una sola potencia de exponente racional $x^r$: $\quad g(x) = \sqrt[3]{x^2 \cdot \sqrt{x}}$.
+    \end{enumerate}
+
+    \item \textbf{[Cálculo de Derivadas y Reglas del Producto/Cociente -- 2.0 pts]} \\
+    Determine la primera derivada $f'(x)$ de cada función y simplifique a su mínima expresión:
+    \begin{enumerate}[label=\alph*),itemsep=1pt,topsep=1pt]
+        \item $f(x) = (3x^2 - 2x + 1) \cdot e^{3x}$
+        \item $\displaystyle g(x) = \frac{x^2 - 4}{x^2 + 4}$
+    \end{enumerate}
+
+    \item \textbf{[Regla de la Cadena y Diferenciales -- 2.0 pts]} \\
+    El método de sustitución ($u$-du) requiere determinar con precisión la diferencial total $dy = f'(x)\,dx$.
+    \begin{enumerate}[label=\alph*),itemsep=1pt,topsep=1pt]
+        \item Calcule la diferencial $dy$ para: $\quad y = \ln\left(4x^3 - 5x + 7\right)$.
+        \item Si $u = \sin(3x^2 - 1)$, determine la diferencial $du$ en términos de $x$ y $dx$.
+    \end{enumerate}
+
+    \item \textbf{[Identidades Trigonométricas Fundamentales -- 2.0 pts]} \\
+    En el cálculo de primitivas trigonométricas se requiere reducir potencias y productos a formas lineales.
+    \begin{enumerate}[label=\alph*),itemsep=1pt,topsep=1pt]
+        \item Verifique analíticamente la identidad trigonométrica: $\displaystyle \frac{\sin(2x)}{1 + \cos(2x)} = \tan(x)$.
+        \item A partir de la identidad $\cos(2x) = 2\cos^2(x) - 1$, despeje $\cos^2(x)$ en términos de $\cos(2x)$ para eliminar la potencia cuadrática.
+    \end{enumerate}
+
+    \item \textbf{[Problema del Valor Inicial / Operación Inversa a la Derivación -- 2.0 pts]} \\
+    Una partícula se desplaza en línea recta con una velocidad instantánea (razón de cambio de la posición $s(t)$) dada por $\displaystyle \frac{ds}{dt} = 6t^2 - 8t + 5$ para $t \ge 0$. Se conoce además que la posición en el instante inicial es $s(0) = 4$.
+    \begin{enumerate}[label=\alph*),itemsep=1pt,topsep=1pt]
+        \item Deduzca la función de posición original $s(t)$ encontrando la antiderivada general y calculando el valor exacto de la constante de integración $C$.
+        \item Determine la posición exacta de la partícula cuando $t = 2$ segundos.
+    \end{enumerate}
+
+\end{enumerate}
+
+\vspace{5pt}
+\begin{center}
+    \footnotesize \textit{<<El cálculo integral es el arte de sumar una infinidad de cantidades infinitamente pequeñas>>}
+\end{center}
+
+\end{document}

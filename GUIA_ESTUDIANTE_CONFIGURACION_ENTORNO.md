@@ -251,24 +251,47 @@ Informacion_matematica/
 ├── requirements.txt                     <- Dependencias cientificas de Python
 ├── GUIA_ESTUDIANTE_CONFIGURACION_ENTORNO.md <- Esta guia practica
 ├── Unidad_1/
-│   ├── bases_datos_proyecto_integrador/ <- Bases oficiales (solo lectura)
-│   ├── 01_formulacion_3pct/             <- Fase 1: Problema, hipotesis, objetivos y variables
-│   ├── 02_avance_4pct/                  <- Fase 2: Scripts, notebooks exploratorios y tablas
-│   ├── 03_producto_tecnico_10pct/       <- Fase 3: Informe formal en LaTeX y PDF (APA 7ma ed.)
-│   ├── 04_defensa_individual_8pct/      <- Fase 4: Presentacion y diapositivas de sustentacion
-│   └── 05_Guias/                        <- Guias oficiales de la catedra (.pdf y .tex)
+│   ├── avance_proyecto_integrador/
+│   │   ├── avance_1/
+│   │   ├── avance_2/
+│   │   └── avance_3/
+│   ├── guias_de_estudio/                <- Guías oficiales y material de estudio
+│   │   ├── guia_1/                      <- Guía general del proyecto (PDF y LaTeX)
+│   │   ├── guia_2/                      <- Guía de entorno y GitHub (PDF y LaTeX)
+│   │   └── guia_3/                      <- Guía de integrales (PDF y LaTeX)
+│   ├── lecciones/                       <- Lecciones organizadas por unidad
+│   ├── base_de_datos/                   <- Carpeta única de bases oficiales
+│   │   ├── Grupo_01_Relieve_Norte/
+│   │   ├── Grupo_02_Relieve_Sur/
+│   │   ├── Grupo_03_Cobertura_Norte/
+│   │   ├── Grupo_04_Cobertura_Sur/
+│   │   ├── Grupo_05_Clima_Norte/
+│   │   ├── Grupo_06_Clima_Sur/
+│   │   └── Grupo_07_Incendios_Loja/
+│   ├── defensa_individual/
+│   ├── formulacion/
+│   ├── guia/
+│   └── producto_tecnico/
 ├── Unidad_2/
-│   ├── 01_formulacion_3pct/             <- Fase 1 U2: Modelos continuos no lineales
-│   ├── 02_avance_4pct/                  <- Fase 2 U2: Integracion analitica y numerica
-│   ├── 03_producto_tecnico_10pct/       <- Fase 3 U2: Informe de Metodologia en LaTeX y PDF
-│   ├── 04_defensa_individual_8pct/      <- Fase 4 U2: Material de sustentacion
-│   └── 05_Guias/
+│   ├── avance_proyecto_integrador/      <- Contiene avance_1, avance_2 y avance_3
+│   ├── guias_de_estudio/
+│   │   ├── guia_1/                      <- Guía general del proyecto (PDF y LaTeX)
+│   │   └── guia_2/                      <- Guía de entorno y GitHub (PDF y LaTeX)
+│   ├── lecciones/
+│   ├── defensa_individual/
+│   ├── formulacion/
+│   ├── guia/
+│   └── producto_tecnico/
 └── Unidad_3/
-    ├── 01_formulacion_3pct/             <- Fase 1 U3: Modelacion fisica y balances
-    ├── 02_avance_4pct/                  <- Fase 2 U3: Integrales dobles y serie temporal
-    ├── 03_producto_tecnico_10pct/       <- Fase 3 U3: Informe Final Consolidado (LaTeX y PDF)
-    ├── 04_defensa_individual_8pct/      <- Fase 4 U3: Sustentacion individual final
-    └── 05_Guias/
+  ├── avance_proyecto_integrador/      <- Contiene avance_1, avance_2 y avance_3
+  ├── guias_de_estudio/
+  │   ├── guia_1/                      <- Guía general del proyecto (PDF y LaTeX)
+  │   └── guia_2/                      <- Guía de entorno y GitHub (PDF y LaTeX)
+  ├── lecciones/
+  ├── defensa_individual/
+  ├── formulacion/
+  ├── guia/
+  └── producto_tecnico/
 ```
 
 ---

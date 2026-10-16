@@ -1,0 +1,303 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-nodecimaldot,es-noshorthands]{babel}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage[margin=2.2cm,headheight=14pt]{geometry}
+\usepackage{booktabs,tabularx,array,longtable}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{pdflscape}
+\usepackage[most]{tcolorbox}
+\usepackage[strings]{underscore}
+\usepackage{hyperref}
+
+\definecolor{unl}{RGB}{0,86,145}
+\definecolor{azulOscuro}{RGB}{12,43,92}
+\definecolor{verde}{RGB}{27,107,74}
+\definecolor{rojo}{RGB}{179,38,30}
+\definecolor{gris}{HTML}{475569}
+\hypersetup{colorlinks=true,linkcolor=azulOscuro,urlcolor=unl}
+\setlength{\parskip}{5pt}
+\setlength{\parindent}{0pt}
+\setlist{leftmargin=*,itemsep=2pt,topsep=3pt}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\small Matemática II: Cálculo Integral}
+\rhead{\small Orientaciones para el avance 2}
+\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\newtcolorbox{nota}[1]{enhanced,breakable,colback=unl!4,colframe=unl,boxrule=0.6pt,arc=2pt,
+  left=6pt,right=6pt,top=4pt,bottom=4pt,fonttitle=\bfseries,title={#1}}
+\newtcolorbox{ejemplo}[1]{enhanced,breakable,colback=verde!4,colframe=verde,boxrule=0.6pt,arc=2pt,
+  left=6pt,right=6pt,top=4pt,bottom=4pt,fonttitle=\bfseries,title={#1}}
+\newtcolorbox{alerta}[1]{enhanced,breakable,colback=rojo!4,colframe=rojo,boxrule=0.6pt,arc=2pt,
+  left=6pt,right=6pt,top=4pt,bottom=4pt,fonttitle=\bfseries,title={#1}}
+
+\begin{document}
+
+\begin{center}
+{\large\bfseries UNIVERSIDAD NACIONAL DE LOJA\par}
+{Facultad Agropecuaria y de Recursos Naturales Renovables\par}
+{Carrera de Ingeniería Ambiental\par}
+\vspace{0.6cm}
+{\color{unl}\rule{0.85\linewidth}{1.2pt}\par}
+\vspace{0.25cm}
+{\LARGE\bfseries Orientaciones para presentar el avance 2\par}
+\vspace{0.15cm}
+{\large Proyecto integrador -- Unidad 1, Fase 2: Avance técnico y datos (4\,\%)\par}
+{\large Matemática II: Cálculo integral aplicado a la Ingeniería Ambiental\par}
+\vspace{0.15cm}
+{\color{unl}\rule{0.85\linewidth}{1.2pt}\par}
+\vspace{0.1cm}
+{Período académico: septiembre 2026 -- febrero 2027 \quad|\quad Docente: Ing. Guillermo Chuncho\par}
+\end{center}
+
+\section*{Propósito y orden de presentación}
+
+El avance 2 muestra cómo evolucionó la formulación después de la revisión del avance 1 y cómo el equipo empezó a comprobarla con su base asignada. No basta con anunciar lo que se piensa hacer: deben poder señalar qué archivo auditaron, qué encontraron en los datos, qué función modelará el fenómeno y qué integral definida calcularán, con sus límites y unidades justificados.
+
+Presenten el documento, elaborado en \LaTeX{} con el archivo \texttt{Formato\_Avance\_2\_Matematica.tex}, en este orden:
+\begin{enumerate}[label=\arabic*.]
+  \setcounter{enumi}{-1}
+  \item Portada.
+  \item Respuesta a la revisión del avance 1.
+  \item Problema de investigación, pregunta e hipótesis.
+  \item Objetivos: uno general y tres específicos.
+  \item Metodología: zona, base, marco de variables, auditoría de calidad y exploración preliminar.
+  \item Planteamiento matemático inicial: función, integral definida y aproximación discreta.
+  \item Referencias y declaración de uso de inteligencia artificial.
+  \item[] Anexo: código reproducible (script o cuaderno) y su ubicación en el repositorio.
+\end{enumerate}
+
+\begin{nota}{Alcance de esta entrega}
+Presenten una formulación corregida y un avance técnico verificable: auditoría de la base, exploración con código y planteamiento analítico de la integral. Se permite \emph{una aproximación numérica preliminar} (por ejemplo, una suma de Riemann o trapezoidal con los datos observados), identificada como tal. No inventen resultados, no afirmen impactos que sus variables no miden y no incluyan conclusiones. Si una actividad aún no se realizó, indíquenlo en lugar de presentarla como terminada.
+\end{nota}
+
+\section*{Portada}
+Incluyan, en este orden: Universidad Nacional de Loja; Facultad Agropecuaria y de Recursos Naturales Renovables; Carrera de Ingeniería Ambiental; asignatura (Matemática II: Cálculo Integral); \textbf{número de grupo según la nómina oficial}; nombres y apellidos completos de todos los integrantes; docente; período académico septiembre 2026 -- febrero 2027; título breve que identifique el tema, la magnitud integral y la zona; fecha.
+
+Comprueben que el grupo, los integrantes, el tema, la zona y el archivo CSV coincidan con la asignación oficial (guía general, Cuadro 1). Si la revisión del avance 1 les señaló una discrepancia de asignación, resuélvanla con el docente \emph{antes} de redactar el avance 2.
+
+\section{Respuesta a la revisión del avance 1}
+
+Como en una revista científica, el equipo responde a cada observación de la matriz \texttt{Matriz\_revision\_avance1\_matematica.xlsx} (hoja de su grupo). Incluyan una tabla con estas columnas:
+
+\begin{center}\small
+\begin{tabularx}{\linewidth}{L{1.1cm} Y Y L{2.2cm}}
+\toprule
+\textbf{N.º} & \textbf{Observación (resumen)} & \textbf{Cambio realizado o justificación} & \textbf{Sección / página}\\
+\midrule
+1 & Ej.: La pregunta es doble. & Se eliminó la segunda pregunta; la fuerza hidrostática se trasladó a la Unidad 3. & Sec. 2.2, p. 3\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Todas las observaciones de severidad \textbf{crítica} y \textbf{mayor} deben aparecer en la tabla. Si el equipo no está de acuerdo con una observación, puede mantener su planteamiento siempre que lo argumente con evidencia (datos, literatura o cálculo). Los grupos sin entrega en el avance 1 indican «Primera presentación» y desarrollan completas las secciones 2 y 3.
+
+\section{Problema de investigación, pregunta e hipótesis}
+
+\subsection*{Problema}
+Expliquen una situación concreta de su tema y zona y construyan el texto de lo específico a lo investigable. Eviten extenderse en consecuencias sociales, ecológicas o causales que la base no permite comprobar.
+
+\begin{center}
+\fcolorbox{unl}{unl!5}{\parbox{0.9\linewidth}{\centering\small
+\textbf{Situación territorial} $\rightarrow$ \textbf{Vacío de conocimiento} $\rightarrow$ \textbf{Relevancia} $\rightarrow$ \textbf{Magnitud que una integral definida permite calcular con la base}}}
+\end{center}
+
+Preguntas guía: ¿qué ocurre en la ventana de estudio?, ¿qué magnitud acumulada (área, lámina, volumen, verdor o área afectada) no se ha cuantificado?, ¿qué columna del CSV la representa?, ¿qué función e intervalo de integración la describen? Toda cifra de contexto debe llevar cita (APA 7) y ser coherente con los datos: si dicen que la zona va de 2\,400 a 3\,200\,m, comprueben que su base lo confirma.
+
+\begin{ejemplo}{Ejemplo orientativo (caso ficticio, no corresponde a ningún grupo)}
+\textbf{Problema.} Una quebrada andina dispone de registros mensuales de caudal entre 2019 y 2024. Las cifras se reportan mes a mes, pero no se ha cuantificado el volumen escurrido en el semestre de estiaje, que es el dato que necesita la junta de riego. Si el caudal se modela como una tasa $Q(t)$ [m$^3$/mes], el volumen del periodo es $V=\int_{t_a}^{t_b} Q(t)\,dt$, y puede compararse con la suma de los registros mensuales.
+
+\textbf{Pregunta.} ¿Cuál es el volumen escurrido $V=\int_{t_a}^{t_b}Q(t)\,dt$ [m$^3$] en la quebrada durante los semestres de estiaje (junio--noviembre) de 2019--2024, y qué fracción representa del volumen anual?
+
+\textbf{Hipótesis.} El volumen de estiaje representa menos del 30\,\% del volumen anual en cada año del periodo 2019--2024 (umbral tomado de [cita]). \emph{Criterio de validación del modelo, que no forma parte de la hipótesis:} la integral del modelo continuo difiere menos del 3\,\% de la suma de los registros mensuales.
+\end{ejemplo}
+
+\subsection*{Pregunta de investigación}
+Redacten \textbf{una sola} pregunta, concreta, planteada en clave de cálculo integral y respondible con su CSV. Debe nombrar la magnitud integral y sus unidades, la zona (o el transecto) y el periodo. Eviten preguntas dobles, preguntas causales del tipo «¿cómo influye…?» y preguntas sobre efectos que la base no mide.
+
+\subsection*{Hipótesis}
+Escriban una afirmación contrastable que anticipe una respuesta. Definan la magnitud, la zona, el periodo, el indicador y un criterio cuantitativo \textbf{justificado} con literatura o con la exploración preliminar. Distingan dos cosas:
+\begin{itemize}
+  \item \textbf{Hipótesis ambiental}: lo que se espera del fenómeno (por ejemplo, la concentración estacional de la lluvia o el signo del cambio de verdor).
+  \item \textbf{Criterio de validación numérica}: cuánto deben coincidir la integral del modelo y la suma discreta. Esto es control de calidad del método, no una hipótesis de investigación.
+\end{itemize}
+
+\begin{alerta}{Errores frecuentes detectados en el avance 1 (no los repitan)}
+\begin{itemize}
+  \item \textbf{Usar la base antigua o columnas que no existen.} La única base válida está en \texttt{Unidad\_1/base\_de\_datos}. Copien los nombres exactos de las columnas desde \texttt{DICCIONARIO\_VARIABLES.csv}.
+  \item \textbf{Tratar el relieve como si cambiara cada mes.} Elevación, pendiente, orientación y distancias son estáticas: una fila por celda. Su «variación mensual» vale cero.
+  \item \textbf{Confundir el nivel $A(t)$ con la tasa $r(t)$.} El NDVI observado es un nivel. Por el TFC, $\int_{t_1}^{t_2} r(t)\,dt=A(t_2)-A(t_1)$. Si quieren integrar la tasa, primero deben construirla ($r\approx\Delta A/\Delta t$).
+  \item \textbf{Creer que una función continua «mejora» la suma mensual de lluvia.} CHIRPS mensual ya es un acumulado: $\sum_k P_k$ es la lámina exacta del periodo. El modelo continuo introduce error de ajuste, y la suma observada es la referencia.
+  \item \textbf{Enunciar mal el TFC.} $\int_a^b f(t)\,dt=F(b)-F(a)$, con $F'=f$. No se trata de «valores extremos» (máximo y mínimo), y no se «demuestra» con datos: se aplica o se verifica.
+  \item \textbf{Asignar unidades imposibles.} El NDVI es adimensional y no se convierte en hectáreas sin un umbral de clasificación. Comprueben siempre las dimensiones: $V\,[\mathrm{m}^3]=A\,[\mathrm{m}^2]\times H\,[\mathrm{m}]$.
+  \item \textbf{Adelantar contenidos de otras unidades sin datos.} La fuerza hidrostática (Unidad 3) exige una geometría $h(y)$, $w(y)$ que la base no tiene.
+  \item \textbf{Afirmar «72 meses completos» sin auditar la base.} Hay celdas y meses sin dato; cuantifíquenlos.
+  \item \textbf{Entregar secciones de plantilla sin completar, cifras sin cita o referencias que no pueden localizarse.}
+\end{itemize}
+\end{alerta}
+
+\section{Objetivos}
+Escriban un objetivo general y tres objetivos específicos. Los objetivos describen resultados que se busca alcanzar, no tareas ni herramientas. Cada objetivo específico empieza con un verbo medible (\emph{cuantificar, ajustar, calcular, comparar, verificar, estimar}) y anticipa una salida revisable.
+
+\begin{ejemplo}{Ejemplo orientativo (mismo caso ficticio)}
+\textbf{Objetivo general:} Cuantificar el volumen escurrido en los semestres de estiaje de 2019--2024 en la quebrada, mediante la integral definida de un modelo continuo del caudal, y contrastarlo con el volumen anual.
+
+\textbf{Objetivos específicos:}
+\begin{enumerate}
+  \item Verificar la integridad de la serie mensual de caudal (periodo, faltantes y valores fuera de rango). \emph{Salida:} tabla de auditoría.
+  \item Ajustar un modelo continuo $Q(t)$ a la serie mensual y evaluar su desempeño. \emph{Salida:} ecuación del modelo, $R^2$, RMSE y figura de ajuste.
+  \item Calcular $\int Q(t)\,dt$ por semestre y año mediante el TFC, compararla con las sumas de Riemann y trapezoidal, y contrastar la hipótesis. \emph{Salida:} tabla de volúmenes y error relativo (\%).
+\end{enumerate}
+\end{ejemplo}
+
+\textbf{Comprobación de coherencia:} el objetivo general responde la pregunta, los específicos en conjunto permiten cumplirlo, cada uno tiene una salida verificable y al menos uno exige explícitamente el cálculo integral. Eviten verbos vagos como «conocer», «reconocer», «entender» o «interpretar» si no van acompañados de una salida concreta.
+
+\section{Metodología}
+
+\subsection*{Zona de estudio y fuente de datos}
+Identifiquen el cantón, la zona y la ventana de estudio (filas y columnas de la malla), el nombre exacto del archivo y el periodo. Las bases ya vienen separadas por grupo: no las unan, no las vuelvan a filtrar y no editen el archivo original. Regla territorial: Norte si \texttt{centro\_y\_m} $\geq 9\,555\,250$; Sur si \texttt{centro\_y\_m} $< 9\,555\,250$. Verifiquen que su archivo la cumple.
+
+\begin{center}\small
+\begin{tabularx}{\linewidth}{L{1.1cm} L{5.4cm} Y L{2.6cm}}
+\toprule
+\textbf{Grupo} & \textbf{Archivo (carpeta \texttt{base\_de\_datos})} & \textbf{Estructura esperada} & \textbf{Unidad de observación}\\
+\midrule
+1, 2 & \texttt{Grupo\_01\_Relieve\_Norte.csv}, \texttt{Grupo\_02\_Relieve\_Sur.csv} & 400 filas $\times$ 17 columnas; ventana 20$\times$20 celdas (10$\times$10 km); \textbf{sin tiempo} & celda de 500 m\\
+3, 4 & \texttt{Grupo\_03\_Cobertura\_Norte.csv}, \texttt{Grupo\_04\_Cobertura\_Sur.csv} & 7\,200 filas $\times$ 28 columnas; 100 celdas $\times$ 72 meses & celda--mes\\
+5, 6 & \texttt{Grupo\_05\_Clima\_Norte.csv}, \texttt{Grupo\_06\_Clima\_Sur.csv} & 7\,200 filas $\times$ 22 columnas; 100 celdas $\times$ 72 meses & celda--mes\\
+7 & \texttt{Grupo\_07\_Incendios\_Loja.xlsx} & Hoja \texttt{Serie\_mensual}: 72 $\times$ 14; hoja \texttt{Resumen\_por\_celda}: 7\,997 $\times$ 10 & mes (cantón) y celda\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Los resultados describen las celdas de la ventana entregada; no deben presentarse como estimaciones oficiales de todo el cantón. Los datos de 2025 no se incorporan.
+
+\subsection*{Marco de variables}
+Presenten una tabla con las columnas que realmente usarán, con su magnitud física, el símbolo matemático, la dimensión, la unidad del dato y la del Sistema Internacional, y el papel que cumplen en el análisis. Las filas siguientes ilustran el formato con columnas comunes y de un tema; cada grupo debe reemplazarlas con las de su archivo.
+
+\begin{center}\small
+\begin{tabularx}{\linewidth}{L{3.6cm} Y L{1.0cm} L{0.9cm} L{1.5cm} L{1.4cm} L{1.5cm}}
+\toprule
+\textbf{Columna} & \textbf{Magnitud} & \textbf{Símb.} & \textbf{Dim.} & \textbf{Unidad dato} & \textbf{Unidad SI} & \textbf{Uso}\\
+\midrule
+\texttt{t\_mes} & Tiempo desde enero de 2019 & $t$ & T & mes (1--72) & s & variable independiente\\
+\texttt{x\_local\_m} & Coordenada horizontal local & $x$ & L & m & m & variable independiente\\
+\texttt{chirps\_precipitacion\_ acumulada\_t1\_mm} & Lámina precipitada en el mes & $P_k$ & L & mm/mes & m & analítica\\
+\texttt{chirps\_dias\_validos\_t1} & Días con dato CHIRPS en el mes & $N_v$ & -- & días & -- & control\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection*{Auditoría de calidad}
+Documenten, con el código, los controles siguientes y su resultado (tabla de auditoría):
+\begin{enumerate}
+  \item \textbf{Comunes:} número de filas, columnas y celdas únicas frente a lo esperado; periodo (\texttt{anio} 2019--2024, \texttt{mes} 1--12, \texttt{t\_mes} 1--72) y ausencia de 2025; regla de zona con \texttt{centro\_y\_m}; valores faltantes por columna; duplicados (\texttt{cell\_id} $\times$ \texttt{t\_mes}); rangos físicamente plausibles.
+  \item \textbf{Relieve (1--2):} una fila por celda; \texttt{alos\_elevacion\_m\_coverage}; integridad del transecto elegido (20 puntos separados $\Delta x=500$ m).
+  \item \textbf{Cobertura (3--4):} \texttt{sentinel\_t1\_missing}, \texttt{disponible\_sentinel\_t1} y \texttt{s2\_cobertura\_valida\_pct}; faltantes de NDVI por mes y por celda; las proporciones MAATE (\texttt{prop\_*}) son estáticas y \texttt{suma\_prop\_maate\_9v} debe valer 1.
+  \item \textbf{Clima (5--6):} \texttt{chirps\_historia\_3m\_completa}, \texttt{chelsa\_historia\_3m\_completa} y \texttt{chirps\_dias\_validos\_t1}. No sumen \texttt{prev2m} ni \texttt{prev3m} con el mes actual: son ventanas solapadas.
+  \item \textbf{Incendios (7):} \texttt{celdas\_validas} y \texttt{celdas\_indeterminadas} por mes; diferencias entre la definición principal (\texttt{ge7\_obs90}) y las alternativas. El área corresponde a celdas con incendio detectado, no a área quemada medida.
+\end{enumerate}
+Declaren el tratamiento que darán a los datos faltantes (excluir, promediar las celdas válidas o interpolar) y justifíquenlo. No imputen sin justificación.
+
+\subsection*{Exploración preliminar}
+\begin{enumerate}
+  \item Nombre y ruta del archivo; número de filas y columnas.
+  \item Cinco filas de ejemplo, consultadas sin modificar el CSV.
+  \item Estadísticos de las variables analíticas: $n$ válido, mínimo, máximo, media y desviación estándar, con unidades.
+  \item \textbf{Primera visualización exploratoria} con título, ejes, unidades, zona y periodo: perfil de elevación del transecto (relieve), serie temporal media de la ventana (cobertura o clima) o serie mensual de área afectada (incendios).
+  \item Al menos \textbf{tres hechos observados}, cada uno sustentado en una variable o en registros concretos. Una observación preliminar no es un resultado final.
+\end{enumerate}
+
+\section{Planteamiento matemático inicial}
+
+Esta sección es el núcleo del avance en Matemática II. Debe contener:
+\begin{enumerate}[label=\alph*)]
+  \item \textbf{Función que modela el fenómeno.} Variable independiente, dominio, unidades y forma propuesta (polinómica, trigonométrica, por tramos, etc.), justificada con lo observado en la exploración. Por ejemplo, $z=f(x)$ [m] con $x\in[0,9\,500]$ m, o $p(t)$ [mm/mes] con $t\in[0,72]$ meses.
+  \item \textbf{Integral definida que se calculará,} con límites justificados (por qué ese intervalo), unidades del resultado e interpretación física.
+  \item \textbf{Conexión con el TFC:} cuál es la antiderivada $F$ y qué representa (por ejemplo, la lámina acumulada $H(t)$), y cómo se verificará que $\int_a^b f\,dt=F(b)-F(a)$.
+  \item \textbf{Discretización con los datos:} $\Delta x$ o $\Delta t$, número de subintervalos $n$ y fórmula de la suma de Riemann o del trapecio que usarán con los valores observados.
+  \item \textbf{Aproximación inicial:} un cálculo preliminar con los datos (por ejemplo, la suma trapezoidal del transecto o la lámina de un año), obtenido con el código e identificado como \emph{preliminar}.
+  \item \textbf{Control dimensional} del resultado.
+\end{enumerate}
+
+\begin{center}\small
+\begin{tabularx}{\linewidth}{L{2.4cm} Y Y Y}
+\toprule
+\textbf{Tema} & \textbf{Función e integral (Unidad 1)} & \textbf{Discretización con la base} & \textbf{Precauciones}\\
+\midrule
+Relieve (1--2) & $z=f(x)$; $A=\int_a^b f(x)\,dx$ [m$^2$]: área de la sección transversal sobre un nivel de referencia & 20 puntos por fila o columna; $\Delta x=500$ m; $n=19$ & Variables estáticas: no hay $t$. Definir el nivel de referencia $z_0$. La longitud de arco corresponde a la Unidad 2.\\
+Cobertura (3--4) & $A(t)$ = NDVI medio; $\int A(t)\,dt$ [NDVI$\cdot$mes] o $\int r(t)\,dt=A(t_2)-A(t_1)$ & $\Delta t=1$ mes; promedio de las celdas válidas & Faltantes de NDVI; NDVI adimensional; no convertir a hectáreas sin umbral.\\
+Clima (5--6) & $p(t)$ [mm/mes]; $H=\int_{t_a}^{t_b}p\,dt$ [mm]; $V=A\cdot10^{-3}H$ [m$^3$] & $\Delta t=1$ mes; $\sum P_k$ es la referencia exacta; $A=2{,}5\times10^{7}$ m$^2$ (100 celdas) & No sumar \texttt{prev2m}/\texttt{prev3m}; definir los meses de cada semestre.\\
+Incendios (7) & $r_{\text{fuego}}(t)$ [ha/mes]; $A(t)=\int_0^t r_{\text{fuego}}(\tau)\,d\tau$ [ha] & 72 meses; verificar con \texttt{area\_incendio\_acumulada\_ha\_ge7\_obs90} & Área de celdas detectadas, no área quemada; considerar las celdas indeterminadas.\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Código preliminar}
+Entreguen un script (\texttt{.py} o \texttt{.R}) o un cuaderno (\texttt{.ipynb}) en el repositorio del equipo que:
+\begin{itemize}
+  \item cargue el CSV con una ruta relativa al repositorio y \textbf{no lo modifique ni lo sobrescriba};
+  \item ejecute la auditoría de calidad y genere la tabla correspondiente;
+  \item calcule los estadísticos básicos y produzca la primera visualización exploratoria;
+  \item calcule la aproximación inicial (Riemann o trapecio) de la sección 5;
+  \item se ejecute de principio a fin sin intervención manual, con comentarios breves y \texttt{requirements.txt} actualizado.
+\end{itemize}
+En el anexo del documento indiquen la ruta del código en el repositorio y un fragmento representativo.
+
+\section{Referencias y uso de inteligencia artificial}
+Citen en el texto (APA 7) toda cifra de contexto y documenten la base y el diccionario del curso. Incluyan solo fuentes realmente consultadas y localizables (DOI o URL). En la declaración de IA indiquen qué herramienta usaron, para qué, qué verificó el equipo y qué partes reescribió. No copien textos generados que se dirigen al lector como instrucciones.
+
+\section*{Revisión antes de entregar}
+\begin{itemize}[label=$\square$]
+  \item La portada contiene institución, facultad, carrera, asignatura, número de grupo oficial, integrantes completos, docente y período.
+  \item La tabla de respuesta a la revisión atiende todas las observaciones críticas y mayores.
+  \item Problema, pregunta, hipótesis y objetivos tratan la misma magnitud, zona y periodo.
+  \item Hay una sola pregunta, en clave de cálculo integral y respondible con el CSV.
+  \item La hipótesis es una afirmación contrastable con indicador y umbral justificado, separada del criterio de validación numérica.
+  \item Hay un objetivo general y tres específicos, cada uno con una salida verificable.
+  \item El marco de variables usa nombres exactos de columnas, símbolos, dimensiones y unidades.
+  \item La auditoría cuantifica los faltantes y verifica periodo, zona y campos de calidad.
+  \item La función, la integral, sus límites, la discretización y la aproximación inicial están planteados con unidades.
+  \item El código se ejecuta de principio a fin, no modifica el CSV y genera al menos una figura.
+  \item No quedan instrucciones de plantilla; las citas y referencias son localizables; se revisaron tildes y nombres propios.
+\end{itemize}
+
+\textbf{Entrega:} PDF compilado desde \texttt{Formato\_Avance\_2\_Matematica.tex}, con el nombre \texttt{Avance2\_GrupoXX\_Tema\_Zona.pdf} (por ejemplo, \texttt{Avance2\_Grupo05\_Clima\_Norte.pdf}), y el código en la carpeta del equipo en el repositorio. Un solo archivo por grupo.
+
+\newpage
+\begin{landscape}
+\section*{Rúbrica de calificación -- Avance 2 (Fase 2, 4\,\% de la unidad)}
+La nota se obtiene sumando los puntos de los siete criterios (máximo 10). Los criterios 4, 5 y 6 desarrollan la rúbrica de la Fase 2 de la guía general (auditoría de calidad, planteamiento analítico y código preliminar); los criterios 1 a 3 evalúan la atención a la revisión del avance 1. Equivalencia: puntos de la fase $=$ nota$/10\times0{,}40$.
+
+\footnotesize
+\begin{longtable}{L{3.4cm} L{0.9cm} L{7.4cm} L{6.2cm} L{4.2cm}}
+\toprule
+\textbf{Criterio} & \textbf{Máx.} & \textbf{Logro completo} & \textbf{Logro parcial} & \textbf{Sin evidencia}\\
+\midrule
+\endhead
+1. Atención a la revisión del avance 1 & 1,00 & 1,00: tabla de respuesta que atiende todas las observaciones críticas y mayores con cambios identificables o una réplica argumentada. & 0,50: se hicieron cambios, pero no se explican o quedan observaciones críticas sin atender. & 0,00: no hay tabla ni cambios identificables.\\
+2. Problema, pregunta e hipótesis & 1,50 & 1,50: problema delimitado y citado; una sola pregunta en clave de cálculo integral, con magnitud, unidades, zona y periodo; hipótesis contrastable con umbral justificado. Coherentes entre sí. & 0,75: los elementos existen, pero falta delimitar, cuantificar o mantener la coherencia, o la pregunta es doble. & 0,00: ausentes o imposibles de responder con la base.\\
+3. Objetivos & 0,50 & 0,50: un OG y tres OE medibles con salida verificable; exigen cálculo integral y responden la pregunta. & 0,25: alguno es vago, describe tareas o no se alinea con la pregunta. & 0,00: no se presentan objetivos utilizables.\\
+4. Zona, base, variables y auditoría de calidad & 2,50 & 2,50: CSV y zona correctos; marco de variables con nombres exactos, símbolos, dimensiones y unidades; auditoría que cuantifica faltantes y verifica periodo, zona y campos de calidad; tratamiento de faltantes justificado. & 1,25: auditoría parcial, tabla de variables incompleta o faltantes no cuantificados. & 0,00: no hay auditoría o las variables no corresponden a la base asignada.\\
+5. Planteamiento matemático inicial & 2,50 & 2,50: función justificada con la exploración; integral con límites y unidades justificados; conexión con el TFC; discretización explícita; aproximación inicial calculada; control dimensional correcto. & 1,25: falta alguno de los componentes o hay errores conceptuales (por ejemplo, confundir nivel y tasa, o unidades inconsistentes). & 0,00: no se plantea ninguna integral o el planteamiento no es aplicable a los datos.\\
+6. Código preliminar y exploración & 1,50 & 1,50: el script se ejecuta de principio a fin, no modifica el CSV, genera la tabla de auditoría, los estadísticos y al menos una figura con unidades; hay tres hechos observados sustentados. & 0,75: el código está incompleto o no es reproducible, o los hechos no se sustentan en datos visibles. & 0,00: no hay código ni evidencia de haber abierto la base.\\
+7. Redacción, \LaTeX{} y APA & 0,50 & 0,50: documento claro, sin instrucciones de plantilla, con ortografía cuidada y citas APA 7 localizables. & 0,25: errores de redacción, formato o citación que dificultan la lectura. & 0,00: plantilla sin completar o sin fuentes.\\
+\midrule
+\textbf{Total} & \textbf{10,00} & \multicolumn{3}{l}{Suma de los siete criterios.}\\
+\bottomrule
+\end{longtable}
+
+\normalsize
+Interpretación: 0 = sin evidencia; 1--4,9 = insuficiente; 5,0--6,9 = parcial; 7,0--8,9 = adecuado; 9,0--10 = sólido y plenamente sustentado. La valoración se limita a lo entregado: un aspecto no adjunto se califica como falta de evidencia.
+\end{landscape}
+
+\end{document}
