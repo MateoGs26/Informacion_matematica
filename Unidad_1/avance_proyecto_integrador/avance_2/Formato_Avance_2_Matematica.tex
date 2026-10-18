@@ -112,8 +112,6 @@ Para el avance se eligió como transecto la fila 141 de la malla (la fila sur de
 
 % =====================================================================
 \section{Variables y magnitudes}
-Los nombres corresponden a las columnas del CSV; el significado y la unidad provienen del diccionario de variables (Chuncho, 2026b). Las columnas \texttt{alos\_northness\_mean}, \texttt{alos\_eastness\_mean}, \texttt{ghsl\_distancia\_asentamiento\_m\_mean} y \texttt{osm\_distancia\_vias\_m\_mean} permanecen en el archivo, pero no se usan en este avance.
-
 \begin{table}[h]
 \centering
 \caption{Variables usadas en el avance}
@@ -138,8 +136,6 @@ Magnitud derivada: el área de sección $A = \int z\,dx$ se expresa en m$^2$, po
 
 % =====================================================================
 \section{Auditoría de calidad}
-Se ejecutaron 14 controles sobre el CSV sin modificarlo (Tabla~\ref{tab:aud}). Registros iniciales: 400; aceptados: 400; descartados: 0.
-
 \begin{table}[h]
 \centering
 \caption{Controles de calidad de la base asignada}\label{tab:aud}
@@ -168,15 +164,7 @@ El único control que no se cumple por completo es la cobertura: 218 de las 400 
 
 % =====================================================================
 \section{Exploración de la ventana y elección del transecto}
-En las 400 celdas, la elevación media va de 1\,643,18 a 3\,291,74 m (media 2\,619,34 m) y la pendiente media de 5,64° a 41,25° (media 26,05°). La Figura~\ref{fig:mapa} muestra la elevación por celda y el transecto elegido.
-
-\begin{figure}[h]
-\centering
-\figsegura{0.62\linewidth}{figuras/fig1_mapa_ventana.pdf}
-\caption{Elevación media por celda de la ventana de relieve (Grupo 1, zona norte) y transecto oeste--este de la fila 141. Elaboración propia con base en Chuncho (2026b).}\label{fig:mapa}
-\end{figure}
-
-\textbf{Criterio de selección.} Entre las 20 filas de la ventana (cada una es un transecto oeste--este de 20 celdas), se eligió la de mayor desnivel $\max z - \min z$. La fila 141 tiene 1\,377,98 m, seguida de la 152 (1\,338,45 m) y la 151 (1\,320,71 m); las filas más al norte tienen desniveles menores (766,30 m en la fila 159). El perfil de la fila 141 se da en la Tabla~\ref{tab:trans}.
+En las 400 celdas, la elevación media va de 1\,643,18 a 3\,291,74 m (media 2\,619,34 m) y la pendiente media de 5,64° a 41,25° (media 26,05°). Entre las 20 filas de la ventana (cada una es un transecto oeste--este de 20 celdas), se eligió la de mayor desnivel $\max z - \min z$. La fila 141 tiene 1\,377,98 m, seguida de la 152 (1\,338,45 m) y la 151 (1\,320,71 m); las filas más al norte tienen desniveles menores (766,30 m en la fila 159). El perfil de la fila 141 se da en la Tabla~\ref{tab:trans}.
 
 \begin{table}[h]
 \centering
@@ -224,14 +212,7 @@ Grado $g$ & $R^2$ & RMSE (m) & LOOCV (m) & $A$ en $[0; 9\,500]$ (m$^2$)\\
 \end{tabular}
 \end{table}
 
-El grado 4 minimiza el LOOCV (169,80 m) y se adopta como modelo preliminar (Figura~\ref{fig:perfil}). Su ajuste es moderado ($R^2 = 0{,}850$; RMSE de 133,68 m) y no reproduce el pico de 3\,051,55 m en $x = 5\,500$ m. Los grados 2 y 3 (4 y 5; 6 y 7) dan el mismo área porque los 20 nodos son simétricos respecto del centro del intervalo y el término impar no contribuye a la integral. En la Unidad 2 se evaluarán otras familias de funciones (por ejemplo, con términos trigonométricos).
-
-\begin{figure}[h]
-\centering
-\figsegura{0.85\linewidth}{figuras/fig2_perfil_transecto.pdf}
-\caption{Perfil de elevación de la fila 141, ajuste polinomial de grado 4 y área bajo la curva (eje vertical truncado en 1\,400 m). Elaboración propia con base en Chuncho (2026b).}\label{fig:perfil}
-\end{figure}
-
+El grado 4 minimiza el LOOCV (169,80 m) y se adopta como modelo preliminar . Su ajuste es moderado ($R^2 = 0{,}850$; RMSE de 133,68 m) y no reproduce el pico de 3\,051,55 m en $x = 5\,500$ m. Los grados 2 y 3 (4 y 5; 6 y 7) dan el mismo área porque los 20 nodos son simétricos respecto del centro del intervalo y el término impar no contribuye a la integral.
 \textbf{Integral planteada.}
 \[
 A = \int_{0}^{9500} f(x)\,dx \qquad [\text{m}^2].
@@ -271,9 +252,7 @@ A_{\text{trap}} = 500\left[\frac{1\,673{,}57 + 2\,731{,}34}{2} + 44\,934{,}67\ri
 \]
 donde 44\,934,67 es la suma de $z_1$ a $z_{18}$. El resultado coincide con la salida del script (23\,568\,562,5 m$^2$).
 
-% =====================================================================
-\section{Código preliminar}
-El script \texttt{01\_carga\_exploracion.py} (Anexo A) lee el CSV en modo lectura, con ruta relativa, y ejecuta de una vez: la auditoría de calidad, la selección del transecto, las aproximaciones de Riemann, trapecio y Simpson, el ajuste polinomial con LOOCV, y las dos figuras de este informe. Guarda las salidas en \texttt{tablas/} y \texttt{figuras/} sin tocar la fuente. Se ejecuta con \texttt{python 01\_carga\_exploracion.py ruta\_csv carpeta\_salida}, y usa NumPy (Harris et al., 2020), pandas (McKinney, 2010) y Matplotlib (Hunter, 2007).
+%ectura, con ruta relativa, y ejecuta de una vez: la auditoría de calidad, la selección del transecto, las aproximaciones de Riemann, trapecio y Simpson, el ajuste polinomial con LOOCV, y las dos figuras de este informe. 
 
 % =====================================================================
 \section{Alcance y limitaciones}
@@ -282,8 +261,6 @@ El script \texttt{01\_carga\_exploracion.py} (Anexo A) lee el CSV en modo lectur
   \item Solo hay 20 puntos por transecto, y cada uno es la media de una celda de 500 m; el perfil suaviza la rugosidad interna (\texttt{alos\_elevacion\_m\_std} va de 31,98 a 113,16 m en el transecto).
   \item El ajuste de grado 4 es moderado ($R^2 = 0{,}850$) y no reproduce el pico del perfil.
   \item La pendiente de la base es la del terreno en cada celda, no la derivada de $f$ en la dirección oeste--este; su uso para verificar $f'(x)$ se tratará en la Unidad 2.
-  \item Las variables de relieve no cambian en 2019--2024 y no se usa 2025; se respeta la restricción del proyecto.
-  \item La elevación procede de un modelo digital derivado de ALOS PRISM y agregado por celda (Tadono et al., 2014); no es una medición de campo.
 \end{itemize}
 
 % =====================================================================
@@ -310,7 +287,7 @@ Zapata-Rios, X., Lopez-Fabara, C., Navarrete, A., Torres-Paguay, S., y Flores, M
 \appendix
 
 
-\section*{Anexo B. Uso de inteligencia artificial}
+\section*{Anexo A. Uso de inteligencia artificial}
 \addcontentsline{toc}{section}{Anexo B. Uso de inteligencia artificial}
 Se usó un asistente de IA (Claude, de Anthropic) como apoyo para organizar el informe en LaTeX, revisar la redacción, redactar el borrador del script y comprobar las cifras. Los resultados se verificaron ejecutando el script sobre el CSV asignado, y el grupo es responsable del contenido y puede explicar cada sección, cada integral y cada línea del código. \completar{Confirmen o ajusten esta declaración con lo que realmente hizo cada integrante.}
 
