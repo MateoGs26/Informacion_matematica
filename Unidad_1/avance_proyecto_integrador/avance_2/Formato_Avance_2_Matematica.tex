@@ -35,6 +35,8 @@
 % Texto gris = instrucción. Reemplácelo o elimínelo antes de entregar.
 \newcommand{\completar}[1]{\textit{\textcolor{gris}{#1}}}
 \newcommand{\completarm}[1]{{\color{gris}#1}}
+% Inserta la figura si existe; si no, muestra un aviso en lugar de fallar
+\newcommand{\figsegura}[2]{\IfFileExists{#2}{\includegraphics[width=#1]{#2}}{\fbox{\parbox{0.8\linewidth}{\centering Falta \detokenize{#2}: copie la carpeta figuras junto al archivo .tex}}}}
 
 \begin{document}
 \hypersetup{pageanchor=false}
@@ -49,7 +51,7 @@
 \vspace{1.2cm}
 {\color{unl}\rule{0.82\linewidth}{1.3pt}\par}
 \vspace{0.5cm}
-{\huge\bfseries \completar{Título: magnitud integral, tema y zona}\par}
+{\huge\bfseries Área bajo el perfil de elevación de un transecto oeste--este en la ventana de relieve de la Zona Norte del cantón Loja\par}
 \vspace{0.4cm}
 {\Large Proyecto integrador -- Avance 2\par}
 {\large Unidad 1, Fase 2: Avance técnico y datos\par}
@@ -58,178 +60,258 @@
 \vfill
 \begin{tabular}{rl}
 \textbf{Asignatura:} & Matemática II: Cálculo Integral\\
-\textbf{Grupo:} & \completar{Número de grupo según la nómina oficial}\\
-\textbf{Tema y zona:} & \completar{Bloque temático -- Norte, Sur o cantón completo}\\
-\textbf{Integrantes:} & \completar{Apellidos y nombres completos}\\
- & \completar{Añada una fila por integrante}\\
+\textbf{Grupo:} & 1\\
+\textbf{Tema y zona:} & Relieve y accesibilidad -- Zona Norte\\
+\textbf{Integrantes:} & Toledo Merino Jhanine\\
+ & Moreno Vera Mayerly\\
+ & González Castillo Carlos\\
+ & Barreto Zapata Dulce\\
 \textbf{Docente:} & Ing. Guillermo Chuncho\\
 \textbf{Período académico:} & septiembre 2026 -- febrero 2027\\
-\textbf{Fecha:} & \completar{dd de mes de 2026}\\
+\textbf{Fecha:} & 17 de octubre de 2026\\
 \end{tabular}
 \vspace{1cm}
 \end{titlepage}
 \hypersetup{pageanchor=true}
 
 % =====================================================================
-\section{Respuesta a la revisión del avance 1}
-Respondan a cada observación de su hoja en \texttt{Matriz\_revision\_avance1\_matematica.xlsx}. Incluyan obligatoriamente todas las observaciones críticas y mayores. Si no están de acuerdo con alguna, argumenten con evidencia. Los grupos sin entrega previa escriben «Primera presentación».
-
-\small
-\begin{tabularx}{\linewidth}{L{1.0cm} Y Y L{2.0cm}}
-\toprule
-\textbf{N.º} & \textbf{Observación (resumen)} & \textbf{Cambio realizado o justificación} & \textbf{Sección / página}\\
-\midrule
-\completar{1} & \completar{Resumen de la observación} & \completar{Qué se cambió y por qué} & \completar{Sec. x}\\
-\completar{2} & \completar{…} & \completar{…} & \completar{…}\\
-\bottomrule
-\end{tabularx}
-\normalsize
+f1
 
 % =====================================================================
 \section{Problema de investigación}
 \subsection{Planteamiento del problema}
-Organicen el texto en este orden: (1) situación territorial o ambiental de la ventana de estudio; (2) vacío de conocimiento: qué magnitud acumulada no se ha cuantificado; (3) relevancia, sin atribuir a la base efectos que no mide; (4) cómo una integral definida y los datos asignados permiten resolverlo.
+La ventana de estudio del Grupo 1 se ubica en la zona norte del cantón Loja (\texttt{centro\_y\_m} $\geq$ 9\,555\,250 m) y comprende 20 $\times$ 20 celdas de 500 m, es decir, 10 $\times$ 10 km (100 km$^2$). Es un territorio de montaña: la elevación media de las celdas va de 1\,643,18 a 3\,291,74 m s.\,n.\,m. (desnivel de 1\,648,56 m), la pendiente media de las celdas es de 26,05° y las distancias medias a la vía más cercana y al asentamiento más cercano son de 1\,229,6 m y 1\,517,5 m, respectivamente (cálculos propios sobre la base asignada; Chuncho, 2026b). La elevación procede de un modelo digital de elevación ALOS (Tadono et al., 2014).
 
-\completar{Redacte aquí el problema con datos de contexto citados (APA 7). Elimine estas instrucciones antes de entregar.}
+El material del curso entrega la elevación celda por celda, pero no una magnitud \emph{acumulada} a lo largo de un perfil: el área de la sección vertical comprendida entre el nivel de referencia de la elevación (nivel del mar) y el terreno. Esa magnitud no se ha cuantificado para la ventana del Grupo 1. Obtenerla exige pasar de 20 valores discretos por transecto a una función continua $z = f(x)$ y calcular su integral definida; es un problema propio del cálculo integral y no se resuelve con una media ni con un conteo de celdas.
+
+El problema es pertinente para la ingeniería ambiental porque el relieve condiciona procesos del territorio. En los Andes ecuatoriales, la pendiente y la orientación figuran entre las variables que más explican la distribución espacial y temporal del fuego (Zapata-Rios et al., 2021). Aquí no se atribuye ningún efecto a la base: se construye la herramienta matemática, un área de sección transversal con su incertidumbre numérica, sobre la cual podrán apoyarse los análisis posteriores (longitud de arco en la Unidad 2 y volumen orográfico en la Unidad 3).
+
+Para el avance se eligió como transecto la fila 141 de la malla (la fila sur de la ventana, \texttt{y\_local\_m} $= 0$), recorrida de oeste a este con 20 celdas, porque es la de mayor desnivel entre las 20 filas de la ventana (1\,377,98 m). Parte de la celda de menor elevación del transecto (1\,673,57 m, en $x = 0$) y llega a la de mayor elevación (3\,051,55 m, en $x = 5\,500$ m), de modo que conecta una cuenca baja con una cumbre.
 
 \subsection{Pregunta de investigación}
-Una sola pregunta, en clave de cálculo integral, que nombre la magnitud y sus unidades, la zona (o el transecto) y el periodo, y que pueda responderse con el CSV.
-
-\textbf{Pregunta:} \completar{Escriba aquí la pregunta.}
+\textbf{Pregunta:} ¿Cuál es el área de la sección vertical bajo el perfil de elevación del transecto oeste--este de la fila 141 de la ventana de relieve de la zona norte del cantón Loja, calculada como integral definida de un modelo continuo ajustado a la elevación media de sus 20 celdas, y en qué porcentaje difiere de la aproximación por sumas de Riemann?
 
 \subsection{Hipótesis}
-Una afirmación contrastable, con indicador y umbral cuantitativo justificados. Escriban por separado el criterio de validación numérica del modelo.
+\textbf{Hipótesis:} Si se ajusta por mínimos cuadrados un polinomio $z = f(x)$ a la elevación media (\texttt{alos\_elevacion\_m\_mean}) de las 20 celdas del transecto de la fila 141, entonces el área $A = \int_{0}^{9500} f(x)\,dx$ difiere en menos del 2\,\% del área obtenida con la regla del trapecio sobre las mismas 20 celdas, medida como $|A_{\text{poli}} - A_{\text{trap}}| / A_{\text{trap}}$. El umbral de 2\,\% es del mismo orden que la diferencia entre las sumas de Riemann por la izquierda y por la derecha (2,2\,\%), y se fija antes de elegir el modelo definitivo de la Unidad 2.
 
-\textbf{Hipótesis:} \completar{Afirmación medible sobre el fenómeno.}
+\subsection{Objetivos}
+\textbf{Objetivo general:} Determinar el área bajo el perfil de elevación del transecto oeste--este de la fila 141 de la ventana de relieve de la zona norte del cantón Loja, mediante la integral definida de un modelo continuo ajustado a la elevación media de 20 celdas ALOS, y contrastarla con sumas de Riemann y con un cálculo manual de control.
 
-\textbf{Justificación del umbral:} \completar{Fuente bibliográfica o evidencia de la exploración preliminar.}
-
-\textbf{Criterio de validación del modelo:} \completar{Ej.: error relativo entre la integral del modelo y la suma discreta menor que X \%.}
-
-% =====================================================================
-\section{Objetivos}
-\subsection{Objetivo general}
-\textbf{Objetivo general:} \completar{Verbo en infinitivo + magnitud integral + zona + datos + periodo. Debe responder la pregunta.}
-
-\subsection{Objetivos específicos}
+\textbf{Objetivos específicos:}
 \begin{enumerate}
-  \item \completar{Objetivo específico 1.} \textbf{Salida:} \completar{tabla, valor, figura o error \%.}
-  \item \completar{Objetivo específico 2.} \textbf{Salida:} \completar{…}
-  \item \completar{Objetivo específico 3.} \textbf{Salida:} \completar{…}
+  \item Auditar la calidad de la base asignada (estructura, zona, faltantes y cobertura). \emph{Salida:} tabla de controles de calidad con el conteo de registros aceptados y descartados.
+  \item Ajustar un modelo continuo $z = f(x)$ al perfil del transecto y plantear $A = \int_a^b f(x)\,dx$ con límites justificados. \emph{Salida:} tabla de ajustes por grado, función elegida e integral planteada.
+  \item Comparar el área del modelo con las sumas de Riemann, el trapecio y Simpson, y verificar un cálculo manual contra el código. \emph{Salida:} tabla comparativa de áreas con sus diferencias porcentuales.
 \end{enumerate}
 
 % =====================================================================
-\section{Metodología}
-\subsection{Zona de estudio y fuente de datos}
-\textbf{Grupo y tema:} \completar{Número de grupo y bloque temático.}\\
-\textbf{Zona y regla territorial:} \completar{Norte o Sur según centro\_y\_m respecto de 9\,555\,250 m, o cantón completo; indique cómo lo verificaron.}\\
-\textbf{Ventana de estudio:} \completar{Filas y columnas de la malla; número de celdas; área en km$^2$.}\\
-\textbf{Archivo asignado:} \completar{Nombre exacto y ruta en Unidad\_1/base\_de\_datos.}\\
-\textbf{Periodo y unidad de observación:} \completar{2019--2024; celda de 500 m (relieve) o celda--mes (cobertura, clima), o mes cantonal (incendios).}
+\section{Delimitación territorial y fuente de datos}
+\textbf{Zona y regla espacial.} Zona norte, definida por \texttt{centro\_y\_m} $\geq$ 9\,555\,250. La base contiene 400 celdas de la ventana de las filas 141 a 160 y las columnas 33 a 52; la menor coordenada \texttt{centro\_y\_m} es 9\,571\,750, de modo que todas las celdas cumplen la regla y ninguna es ajena a la zona norte.
 
-\subsection{Marco de variables}
-Usen los nombres exactos de las columnas y consulten el significado y la unidad en \texttt{DICCIONARIO\_VARIABLES.csv}. Incluyan solo las variables que usarán y distingan las analíticas de las de control.
-
-\small
-\begin{tabularx}{\linewidth}{L{3.4cm} Y L{1.0cm} L{0.9cm} L{1.5cm} L{1.3cm} L{1.6cm}}
-\toprule
-\textbf{Columna} & \textbf{Magnitud} & \textbf{Símb.} & \textbf{Dim.} & \textbf{Unidad dato} & \textbf{Unidad SI} & \textbf{Uso}\\
-\midrule
-\completar{nombre\_exacto} & \completar{Definición} & \completar{$x$} & \completar{L} & \completar{m} & \completar{m} & \completar{analítica / control}\\
-\completar{nombre\_exacto} & \completar{Definición} & \completar{} & \completar{} & \completar{} & \completar{} & \completar{}\\
-\completar{nombre\_exacto} & \completar{Definición} & \completar{} & \completar{} & \completar{} & \completar{} & \completar{}\\
-\bottomrule
-\end{tabularx}
-\normalsize
-
-\subsection{Auditoría de calidad}
-Reporten el resultado de cada control (realizado con el código del anexo).
-
-\small
-\begin{tabularx}{\linewidth}{L{4.6cm} L{3.0cm} Y}
-\toprule
-\textbf{Control} & \textbf{Esperado} & \textbf{Observado / decisión}\\
-\midrule
-Filas $\times$ columnas & \completar{p. ej. 7\,200 $\times$ 22} & \completar{}\\
-Celdas únicas & \completar{} & \completar{}\\
-Periodo (anio, mes, t\_mes); sin 2025 & 2019--2024; 1--12; 1--72 & \completar{}\\
-Regla de zona (centro\_y\_m) & \completar{} & \completar{}\\
-Duplicados & 0 & \completar{}\\
-Faltantes por variable analítica & \completar{} & \completar{n y \% por columna; por mes o por celda si aplica}\\
-Campos de calidad del tema & \completar{p. ej. sentinel\_t1\_missing} & \completar{}\\
-Rangos físicamente plausibles & \completar{} & \completar{}\\
-\bottomrule
-\end{tabularx}
-\normalsize
-
-\textbf{Tratamiento de datos faltantes:} \completar{Excluir, promediar las celdas válidas o interpolar; justifique la decisión.}
-
-\subsection{Exploración preliminar}
-\begin{itemize}
-  \item \textbf{Cinco filas de ejemplo:} \completar{tabla breve con las columnas seleccionadas; indique cómo se eligieron.}
-  \item \textbf{Estadísticos descriptivos:} \completar{tabla con $n$ válido, mínimo, máximo, media y desviación estándar, con unidades.}
-  \item \textbf{Primera visualización exploratoria:} \completar{inserte la figura con título, ejes, unidades, zona y periodo.}
-  \item \textbf{Hechos observados:}
-  \begin{enumerate}
-    \item \completar{Hecho 1 y la variable o los registros que lo sustentan.}
-    \item \completar{Hecho 2 …}
-    \item \completar{Hecho 3 …}
-  \end{enumerate}
-\end{itemize}
-
-% Ejemplo para insertar la figura generada por el código:
-% \begin{figure}[h]\centering
-%   \includegraphics[width=0.85\linewidth]{figuras/exploracion_1.pdf}
-%   \caption{Título, zona y periodo. Fuente: elaboración propia con base en ...}
-% \end{figure}
+\textbf{Archivo y unidad de observación.} Archivo asignado: \texttt{Grupo\_01\_Relieve\_Norte.csv} (en el manifiesto figura como \texttt{equipo\_01\_relieve\_norte.csv}): 400 registros, 17 columnas y una fila por celda de 500 m $\times$ 500 m (25 ha). Las variables de relieve son estáticas, por lo que no hay dimensión temporal; el periodo del proyecto es 2019--2024 y no se usan datos de 2025. La huella SHA-256 del archivo coincide con la del manifiesto (\texttt{f3881317...e996}) una vez normalizados los saltos de línea a CRLF, y el CSV no fue modificado (Chuncho, 2026b).
 
 % =====================================================================
-\section{Planteamiento matemático inicial}
-\subsection{Modelo funcional}
-\completar{Variable independiente, dominio y unidades; forma propuesta de la función (polinómica, trigonométrica, por tramos…) y por qué, según la exploración.}
+\section{Variables y magnitudes}
+Los nombres corresponden a las columnas del CSV; el significado y la unidad provienen del diccionario de variables (Chuncho, 2026b). Las columnas \texttt{alos\_northness\_mean}, \texttt{alos\_eastness\_mean}, \texttt{ghsl\_distancia\_asentamiento\_m\_mean} y \texttt{osm\_distancia\_vias\_m\_mean} permanecen en el archivo, pero no se usan en este avance.
+
+\begin{table}[h]
+\centering
+\caption{Variables usadas en el avance}
+\small
+\begin{tabularx}{\linewidth}{L{3.7cm} L{1.4cm} Y L{1.5cm} L{2.2cm}}
+\toprule
+\textbf{Variable (columna)} & \textbf{Símbolo} & \textbf{Magnitud y significado} & \textbf{Unidad} & \textbf{Uso}\\
+\midrule
+\texttt{x\_local\_m} & $x$ & Distancia este--oeste desde la celda de la esquina suroeste de la ventana (0; 500; 1\,000; \dots) & m & Variable de integración\\
+\texttt{y\_local\_m} & $y$ & Distancia sur--norte desde la misma celda & m & Selección del transecto\\
+\texttt{alos\_elevacion\_m\_mean} & $z$ & Elevación media de la celda (modelo digital ALOS) & m & Función a ajustar e integrar\\
+\texttt{alos\_elevacion\_m\_std} & $\sigma_z$ & Desviación estándar de la elevación dentro de la celda (rugosidad) & m & Referencia de incertidumbre\\
+\texttt{alos\_elevacion\_m\_min}, \texttt{alos\_elevacion\_m\_max} & $z_{\min}$, $z_{\max}$ & Elevación mínima y máxima dentro de la celda & m & Control de coherencia\\
+\texttt{alos\_pendiente\_grados\_mean} & $\theta$ & Pendiente media del terreno & grados (°) & Verificación de $f'(x)$ en la Unidad 2\\
+\texttt{alos\_elevacion\_m\_coverage} & $c$ & Fracción de la celda con dato válido de ALOS & fracción & Control de calidad\\
+\texttt{cell\_id}, \texttt{fila}, \texttt{columna} & --- & Identificación de la celda en la malla de 500 m & texto, índice & Identificación y trazabilidad\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Magnitud derivada: el área de sección $A = \int z\,dx$ se expresa en m$^2$, porque $z$ y $x$ están en metros. La pendiente $\theta$ se da en grados; para derivar se usará $\tan\theta$ o su equivalente en radianes ($1^\circ = \pi/180$ rad).
+
+% =====================================================================
+\section{Auditoría de calidad}
+Se ejecutaron 14 controles sobre el CSV sin modificarlo (Tabla~\ref{tab:aud}). Registros iniciales: 400; aceptados: 400; descartados: 0.
+
+\begin{table}[h]
+\centering
+\caption{Controles de calidad de la base asignada}\label{tab:aud}
+\small
+\begin{tabularx}{\linewidth}{Y L{2.0cm} L{4.4cm}}
+\toprule
+\textbf{Control} & \textbf{Resultado} & \textbf{Detalle}\\
+\midrule
+Registros y columnas & Cumple & 400 $\times$ 17\\
+Celdas únicas y pares (fila, columna) sin repetir & Cumple & 400; 0 repetidos\\
+Valores faltantes & Cumple & 0\\
+Zona norte (\texttt{centro\_y\_m} $\geq$ 9\,555\,250) & Cumple & mínimo 9\,571\,750\\
+Ventana filas 141--160, columnas 33--52 & Cumple & 20 $\times$ 20\\
+\texttt{cell\_id} coincide con fila y columna & Cumple & 400 de 400\\
+$x = 500\,(\text{columna}-33)$ y $y = 500\,(\text{fila}-141)$ & Cumple & 400 de 400\\
+$z_{\min} \leq z \leq z_{\max}$ y $\sigma_z \geq 0$ & Cumple & 400 de 400\\
+Pendiente en $[0^\circ, 90^\circ]$ & Cumple & 5,64° a 41,25°\\
+Northness y eastness en $[-1, 1]$ & Cumple & ok\\
+Distancias no negativas & Cumple & ok\\
+Cobertura ALOS completa ($c = 1$) & No cumple & 218 celdas con $c < 1$; mínimo 0,9604\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+El único control que no se cumple por completo es la cobertura: 218 de las 400 celdas tienen $c < 1$, pero el mínimo es 0,9604, es decir, todas tienen al menos el 96\,\% de píxeles ALOS válidos. Como criterio se fijó $c \geq 0{,}95$, que cumplen las 400 celdas, por lo que no se descarta ninguna. En el transecto elegido la cobertura mínima es 0,98 (6 de las 20 celdas con $c < 1$). La base no trae variables de sensores temporales como Sentinel, CHIRPS o VIIRS, por lo que \texttt{alos\_elevacion\_m\_coverage} es la variable de calidad aplicable.
+
+% =====================================================================
+\section{Exploración de la ventana y elección del transecto}
+En las 400 celdas, la elevación media va de 1\,643,18 a 3\,291,74 m (media 2\,619,34 m) y la pendiente media de 5,64° a 41,25° (media 26,05°). La Figura~\ref{fig:mapa} muestra la elevación por celda y el transecto elegido.
+
+\begin{figure}[h]
+\centering
+\figsegura{0.62\linewidth}{figuras/fig1_mapa_ventana.pdf}
+\caption{Elevación media por celda de la ventana de relieve (Grupo 1, zona norte) y transecto oeste--este de la fila 141. Elaboración propia con base en Chuncho (2026b).}\label{fig:mapa}
+\end{figure}
+
+\textbf{Criterio de selección.} Entre las 20 filas de la ventana (cada una es un transecto oeste--este de 20 celdas), se eligió la de mayor desnivel $\max z - \min z$. La fila 141 tiene 1\,377,98 m, seguida de la 152 (1\,338,45 m) y la 151 (1\,320,71 m); las filas más al norte tienen desniveles menores (766,30 m en la fila 159). El perfil de la fila 141 se da en la Tabla~\ref{tab:trans}.
+
+\begin{table}[h]
+\centering
+\caption{Perfil de elevación del transecto oeste--este (fila 141)}\label{tab:trans}
+\small
+\begin{tabular}{rrr@{\hspace{1.2cm}}rrr}
+\toprule
+$i$ & $x_i$ (m) & $z_i$ (m) & $i$ & $x_i$ (m) & $z_i$ (m)\\
+\midrule
+0 & 0 & 1\,673,57 & 10 & 5\,000 & 2\,938,50\\
+1 & 500 & 1\,741,15 & 11 & 5\,500 & 3\,051,55\\
+2 & 1\,000 & 2\,070,09 & 12 & 6\,000 & 2\,903,18\\
+3 & 1\,500 & 2\,310,79 & 13 & 6\,500 & 2\,622,26\\
+4 & 2\,000 & 2\,351,05 & 14 & 7\,000 & 2\,438,33\\
+5 & 2\,500 & 2\,434,54 & 15 & 7\,500 & 2\,310,32\\
+6 & 3\,000 & 2\,459,38 & 16 & 8\,000 & 2\,322,69\\
+7 & 3\,500 & 2\,465,78 & 17 & 8\,500 & 2\,502,49\\
+8 & 4\,000 & 2\,606,27 & 18 & 9\,000 & 2\,632,95\\
+9 & 4\,500 & 2\,773,35 & 19 & 9\,500 & 2\,731,34\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% =====================================================================
+\section{Planteamiento analítico}
+\subsection{Modelo continuo e integral}
+Se modela el perfil como un polinomio $f(x) = \sum_{k=0}^{g} a_k x^k$ ajustado por mínimos cuadrados a los 20 puntos $(x_i, z_i)$ de la Tabla~\ref{tab:trans}. El polinomio es integrable término a término, y su integral exacta es $\int f\,dx = \sum_{k=0}^{g} a_k x^{k+1}/(k+1)$. El grado se elige con el error de validación cruzada dejando uno fuera (LOOCV), que penaliza el sobreajuste (Tabla~\ref{tab:ajuste}).
+
+\begin{table}[h]
+\centering
+\caption{Ajuste polinomial de $z = f(x)$ por grado}\label{tab:ajuste}
+\small
+\begin{tabular}{rrrrr}
+\toprule
+Grado $g$ & $R^2$ & RMSE (m) & LOOCV (m) & $A$ en $[0; 9\,500]$ (m$^2$)\\
+\midrule
+1 & 0,337 & 281,34 & 313,57 & 23\,436\,300\\
+2 & 0,706 & 187,38 & 229,00 & 23\,649\,384\\
+3 & 0,774 & 164,26 & 210,78 & 23\,649\,384\\
+\textbf{4} & \textbf{0,850} & \textbf{133,68} & \textbf{169,80} & \textbf{23\,543\,232}\\
+5 & 0,887 & 115,97 & 235,44 & 23\,543\,232\\
+6 & 0,903 & 107,92 & 376,97 & 23\,587\,962\\
+7 & 0,983 & 44,48 & 208,27 & 23\,587\,962\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+El grado 4 minimiza el LOOCV (169,80 m) y se adopta como modelo preliminar (Figura~\ref{fig:perfil}). Su ajuste es moderado ($R^2 = 0{,}850$; RMSE de 133,68 m) y no reproduce el pico de 3\,051,55 m en $x = 5\,500$ m. Los grados 2 y 3 (4 y 5; 6 y 7) dan el mismo área porque los 20 nodos son simétricos respecto del centro del intervalo y el término impar no contribuye a la integral. En la Unidad 2 se evaluarán otras familias de funciones (por ejemplo, con términos trigonométricos).
+
+\begin{figure}[h]
+\centering
+\figsegura{0.85\linewidth}{figuras/fig2_perfil_transecto.pdf}
+\caption{Perfil de elevación de la fila 141, ajuste polinomial de grado 4 y área bajo la curva (eje vertical truncado en 1\,400 m). Elaboración propia con base en Chuncho (2026b).}\label{fig:perfil}
+\end{figure}
+
+\textbf{Integral planteada.}
 \[
-  \completarm{f(x) =\ldots \qquad x\in[a,b]\ \text{[unidades]}}
+A = \int_{0}^{9500} f(x)\,dx \qquad [\text{m}^2].
 \]
+\emph{Significado físico:} área de la sección vertical comprendida entre el nivel $z = 0$ (nivel del mar) y el terreno, a lo largo de 9\,500 m.
 
-\subsection{Integral definida}
-\completar{Integral que se calculará, límites de integración justificados, unidades del resultado e interpretación física.}
+\textbf{Justificación de los límites.} Los datos existen solo en los centros de las celdas, que van de $x = 0$ (primera celda) a $x = 9\,500$ m (última celda); por eso $a = 0$ y $b = 9\,500$ m. Extender el intervalo a los bordes de celda ($-250$ y $9\,750$ m) obligaría a extrapolar el modelo 250 m en cada extremo, donde no hay datos. Al interpretar el resultado debe recordarse que, al tomar como referencia el nivel del mar, el área está dominada por la altitud base; por ejemplo, la parte que queda sobre la cota mínima del transecto ($1\,673{,}57 \times 9\,500 = 15\,898\,915$ m$^2$ por debajo) es solo de unos 7\,669\,648 m$^2$ con la regla del trapecio.
+
+\subsection{Aproximación numérica y comparación}
+Con $h = 500$ m y $n = 19$ intervalos, las sumas de Riemann por la izquierda y por la derecha son $\sum_{i=0}^{18} z_i\,h$ y $\sum_{i=1}^{19} z_i\,h$; la regla del trapecio es $h\left[\tfrac{z_0 + z_{19}}{2} + \sum_{i=1}^{18} z_i\right]$. Como $n$ es impar, Simpson se aplicó con la regla de 1/3 en los primeros 16 intervalos y la de 3/8 en los últimos 3. La Tabla~\ref{tab:comp} compara los resultados con la integral exacta del polinomio.
+
+\begin{table}[h]
+\centering
+\caption{Área bajo el perfil de la fila 141 por método}\label{tab:comp}
+\small
+\begin{tabular}{lrrr}
+\toprule
+Método & $A$ (m$^2$) & $A$ (km$^2$) & Dif. con trapecio (\%)\\
+\midrule
+Riemann por la izquierda & 23\,304\,120 & 23,30 & $-1{,}12$\\
+Riemann por la derecha & 23\,833\,005 & 23,83 & $+1{,}12$\\
+Trapecio & 23\,568\,563 & 23,57 & 0,00\\
+Simpson (1/3 y 3/8) & 23\,564\,452 & 23,56 & $-0{,}02$\\
+Polinomio de grado 4 (integral exacta) & 23\,543\,232 & 23,54 & $-0{,}11$\\
+\midrule
+Celdas como rectángulos en $[-250;\,9\,750]$ & 24\,669\,790 & 24,67 & $+4{,}67$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+El polinomio difiere en 0,11\,\% de la regla del trapecio, por debajo del umbral de 2\,\% de la hipótesis. Este resultado es una aproximación inicial: el contraste formal con el modelo definitivo se hará en la Unidad 2. La última fila no es comparable de forma directa porque integra sobre un intervalo de 10\,000 m, y no de 9\,500 m.
+
+\subsection{Cálculo manual de control}
+Para la primera franja ($[0;\,500]$ m) la regla del trapecio da $500 \cdot \dfrac{1\,673{,}57 + 1\,741{,}15}{2} = 853\,680$ m$^2$. Para todo el transecto:
 \[
-  \completarm{I =\int_{a}^{b} f(x)\,dx \quad [\text{unidades}]}
+A_{\text{trap}} = 500\left[\frac{1\,673{,}57 + 2\,731{,}34}{2} + 44\,934{,}67\right] = 500\,(2\,202{,}455 + 44\,934{,}67) = 23\,568\,562{,}5\ \text{m}^2,
 \]
-\textbf{Conexión con el TFC:} \completar{Antiderivada $F$, qué representa y cómo se verificará que $\int_a^b f = F(b)-F(a)$.}
+donde 44\,934,67 es la suma de $z_1$ a $z_{18}$. El resultado coincide con la salida del script (23\,568\,562,5 m$^2$).
 
-\subsection{Discretización y aproximación inicial}
-\completar{$\Delta x$ o $\Delta t$, número de subintervalos $n$ y fórmula de la suma de Riemann o del trapecio con los datos observados.}
-\[
-  \completarm{T_n =\frac{\Delta x}{2}\left[f(x_0) + 2\sum_{i=1}^{n-1} f(x_i) + f(x_n)\right]}
-\]
-\textbf{Resultado preliminar:} \completar{valor obtenido con el código, con unidades. Indique que es preliminar.}
+% =====================================================================
+\section{Código preliminar}
+El script \texttt{01\_carga\_exploracion.py} (Anexo A) lee el CSV en modo lectura, con ruta relativa, y ejecuta de una vez: la auditoría de calidad, la selección del transecto, las aproximaciones de Riemann, trapecio y Simpson, el ajuste polinomial con LOOCV, y las dos figuras de este informe. Guarda las salidas en \texttt{tablas/} y \texttt{figuras/} sin tocar la fuente. Se ejecuta con \texttt{python 01\_carga\_exploracion.py ruta\_csv carpeta\_salida}, y usa NumPy (Harris et al., 2020), pandas (McKinney, 2010) y Matplotlib (Hunter, 2007).
 
-\textbf{Control dimensional:} \completar{p. ej. [m$^2$] = [m] $\times$ [m].}
-
-\subsection{Actividades realizadas y pendientes}
-\completar{Separe lo que ya se comprobó de lo que queda planificado para el producto técnico (Fase 3).}
+% =====================================================================
+\section{Alcance y limitaciones}
+\begin{itemize}
+  \item El resultado describe un único transecto de la ventana de 100 km$^2$ y no el relieve de toda la zona norte ni del cantón.
+  \item Solo hay 20 puntos por transecto, y cada uno es la media de una celda de 500 m; el perfil suaviza la rugosidad interna (\texttt{alos\_elevacion\_m\_std} va de 31,98 a 113,16 m en el transecto).
+  \item El ajuste de grado 4 es moderado ($R^2 = 0{,}850$) y no reproduce el pico del perfil.
+  \item La pendiente de la base es la del terreno en cada celda, no la derivada de $f$ en la dirección oeste--este; su uso para verificar $f'(x)$ se tratará en la Unidad 2.
+  \item Las variables de relieve no cambian en 2019--2024 y no se usa 2025; se respeta la restricción del proyecto.
+  \item La elevación procede de un modelo digital derivado de ALOS PRISM y agregado por celda (Tadono et al., 2014); no es una medición de campo.
+\end{itemize}
 
 % =====================================================================
 \section*{Referencias}
-\completar{Lista en APA 7, solo con fuentes citadas en el texto y localizables (DOI o URL). Incluya la base y el diccionario del curso.}
+\addcontentsline{toc}{section}{Referencias}
+\begingroup
+\setlength{\parindent}{-1.27cm}\setlength{\leftskip}{1.27cm}\setlength{\parskip}{6pt}
+Chuncho, G. (2026a). \textit{Guía general del proyecto integrador de asignatura: Matemática II, cálculo integral aplicado a la ingeniería ambiental} [Documento del curso]. Universidad Nacional de Loja.
 
-\begin{itemize}
-  \item \completar{Autor, A. (Año). Título. \textit{Revista, vol}(n), pp. https://doi.org/...}
-\end{itemize}
+Chuncho, G. (2026b). \textit{Informacion\_matematica} [Repositorio de GitHub; bases de datos del proyecto integrador, diccionario de variables y manifiesto]. GitHub. \url{https://github.com/cguillermo79/Informacion_matematica}
 
+Harris, C. R., Millman, K. J., van der Walt, S. J., Gommers, R., Virtanen, P., Cournapeau, D., Wieser, E., Taylor, J., Berg, S., Smith, N. J., Kern, R., Picus, M., Hoyer, S., van Kerkwijk, M. H., Brett, M., Haldane, A., del Río, J. F., Wiebe, M., Peterson, P., \dots\ Oliphant, T. E. (2020). Array programming with NumPy. \textit{Nature, 585}(7825), 357--362. \url{https://doi.org/10.1038/s41586-020-2649-2}
+
+Hunter, J. D. (2007). Matplotlib: A 2D graphics environment. \textit{Computing in Science \& Engineering, 9}(3), 90--95. \url{https://doi.org/10.1109/MCSE.2007.55}
+
+McKinney, W. (2010). Data structures for statistical computing in Python. En S. van der Walt y J. Millman (Eds.), \textit{Proceedings of the 9th Python in Science Conference} (pp. 56--61). \url{https://doi.org/10.25080/Majora-92bf1922-00a}
+
+Tadono, T., Ishida, H., Oda, F., Naito, S., Minakawa, K., y Iwamoto, H. (2014). Precise global DEM generation by ALOS PRISM. \textit{ISPRS Annals of the Photogrammetry, Remote Sensing and Spatial Information Sciences, II-4}, 71--76. \url{https://doi.org/10.5194/isprsannals-II-4-71-2014}
+
+Zapata-Rios, X., Lopez-Fabara, C., Navarrete, A., Torres-Paguay, S., y Flores, M. (2021). Spatiotemporal patterns of burned areas, fire drivers, and fire probability across the equatorial Andes. \textit{Journal of Mountain Science, 18}(4), 952--972. \url{https://doi.org/10.1007/s11629-020-6402-y}
+\endgroup
+
+% =====================================================================
 \appendix
-\section{Código reproducible}
-\textbf{Ruta en el repositorio:} \completar{p. ej. Unidad\_1/proyecto/grupo\_XX/avance2.ipynb}
 
-\begin{lstlisting}[language=Python]
-# Fragmento representativo (reemplazar por el código del equipo)
-import pandas as pd
-df = pd.read_csv("ruta/relativa/al/archivo.csv")   # solo lectura
-print(df.shape)
-\end{lstlisting}
 
-\section{Declaración de uso de inteligencia artificial}
-\completar{Herramienta utilizada, para qué se usó, qué verificó el equipo y qué partes fueron reescritas por el equipo.}
+\section*{Anexo B. Uso de inteligencia artificial}
+\addcontentsline{toc}{section}{Anexo B. Uso de inteligencia artificial}
+Se usó un asistente de IA (Claude, de Anthropic) como apoyo para organizar el informe en LaTeX, revisar la redacción, redactar el borrador del script y comprobar las cifras. Los resultados se verificaron ejecutando el script sobre el CSV asignado, y el grupo es responsable del contenido y puede explicar cada sección, cada integral y cada línea del código. \completar{Confirmen o ajusten esta declaración con lo que realmente hizo cada integrante.}
 
 \end{document}
